@@ -1,11 +1,10 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
-import Login, { loginAction } from "../features/identity/components/login";
+import Login from "../features/identity/components/login";
 import IdentityLayout from "../layouts/identity-layout";
 import {Scores, Team, NotFound, UnhandledException, Welcome, QuestionPage} from "../pages";
-
-// Authentication loader
 const authLoader = async () => {
-  const code = localStorage.getItem("code"); // Replace this with your actual authentication check
+  const gameStorage = JSON.parse(localStorage.getItem("game-storage") as string)
+  const code = gameStorage.state.code;
   if (!code) {
     throw redirect("/login");
   }
@@ -47,7 +46,6 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <Login />,
-        action: loginAction,
         errorElement: <Login />,
       },
     ],

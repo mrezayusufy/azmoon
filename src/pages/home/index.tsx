@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Navbar } from "../../components"; 
 import { useQuestionStore } from "../../store";
 import { toast } from "sonner";
-import { useQuery } from "@tanstack/react-query";
 
 export const Home = () => { 
   const {answer, orderId, code: gameCode, setOrderId, setCode : setGameCode, setSelectedAnswer } = useQuestionStore((state) => ({
@@ -16,7 +15,6 @@ export const Home = () => {
   const [_answer, _setAnswer] = useState("")
   const [code, setCode] = useState(gameCode);
   
- 
   const handleSetCode = (e: any) => {
     e.preventDefault();
     setGameCode(code);

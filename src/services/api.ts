@@ -1,6 +1,6 @@
 
-
-const BASE_URL: string = import.meta.env.API+"/api" as string | "http://173.249.57.172:1403/api"  as string;
+// @ts-ignore
+const BASE_URL: string = "http://173.249.57.172:1403/api"  as string;
 // Api.ts
 export class Api {
   private baseUrl: string;

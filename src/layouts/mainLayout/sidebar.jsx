@@ -1,13 +1,16 @@
-import { useAppContext } from "../../contexts/app/app-context";
+import { useAppContext } from "@/contexts/app/app-context";
 import { NavLink } from "react-router-dom";
+import {LOGO} from "@/constants"
+import { Podium, QuestionIcon, ScoreIcon, TeamIcon } from "@/components"
 
 const Sidebar = () => {
   const { showSidebar } = useAppContext();
+  const size = 24;
   return (
     <nav className={`sidebar ${!showSidebar ? "collapsed" : ""}`}>
       <div className="sidebar-content">
         <a className="sidebar-brand d-flex flex-column align-items-center pt-0 mb-0">
-          <img src="" alt="logo" style={{ height: "80px" }} />
+          <img src={LOGO} alt="logo" style={{ height: "80px" }} />
           <p className="mb-0" style={{ fontSize: "90%" }}>
             برنامه آزمون
           </p>
@@ -24,7 +27,7 @@ const Sidebar = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <i className="fas fa-edit align-middle me-2"></i>
+              <Podium width={size} height={size} />
               <span className="align-middle me-2">مدیریت مسابقه</span>
             </NavLink>
           </li>
@@ -37,7 +40,7 @@ const Sidebar = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <i className="fas fa-users align-middle me-2"></i>
+              <TeamIcon width={size} height={size}/>
               <span className="align-middle me-2">نمایش تیم ها</span>
             </NavLink>
           </li>
@@ -50,7 +53,7 @@ const Sidebar = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <i className="fas fa-question align-middle me-2"></i>
+              <QuestionIcon width={size} height={size}/>
               <span className="align-middle me-2">نمایش سوالات</span>
             </NavLink>
           </li>
@@ -63,7 +66,7 @@ const Sidebar = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <i className="fas fa-trophy align-middle me-2"></i>
+              <ScoreIcon width={size} height={size}/>
               <span className="align-middle me-2">نمایش نمرات تیم ها</span>
             </NavLink>
           </li>
