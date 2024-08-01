@@ -1,10 +1,11 @@
 import { useForm } from "react-hook-form";
+import { LogoAnimation } from "../../../components"
 import {
   redirect,
   useNavigation,
   useRouteError,
   useSubmit,
-} from "react-router-dom";
+} from "react-router-dom"; 
 import { httpService } from "@core/http-service";
 const Login = () => {
   const {
@@ -15,20 +16,20 @@ const Login = () => {
 
   const submitForm = useSubmit();
 
-
   const navigation = useNavigation();
   const isSubmitting = navigation.state !== "idle";
 
   const routeErrors = useRouteError();
 
   const onSubmit = (data) => {
-    submitForm(data, { method: "post" });
+  submitForm(data, { method: "post" });
   };
 
   return (
     <>
-      <div className="text-center mt-4">
-        <img src='/' style={{ height: "100px" }} alt="logo"/>
+      <div className="text-center mt-4 login">
+        {/* <img src={LOGO} style={{ height: "100px" }} alt="logo"/> */}
+        <LogoAnimation/>
         <h1 className="h2"> ورود به بازی</h1>
         <p className="lead"> آزمون </p>
         <p className="lead">

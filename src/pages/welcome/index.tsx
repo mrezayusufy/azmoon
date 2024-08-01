@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Sidebar from "../../layouts/mainLayout/sidebar";
 import TopNav from "../../layouts/mainLayout/top-nav";
 
-const Welcome = () => {
+export const Welcome = () => {
   const {
     register: registerOrderId,
     handleSubmit: handleSubmitOrderId,
@@ -132,6 +132,4 @@ const Welcome = () => {
       <ToastContainer rtl />
     </div>
   );
-};
-
-export default Welcome;
+}; 

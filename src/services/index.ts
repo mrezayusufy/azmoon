@@ -1,0 +1,1 @@
+export { getQuestion } from "./question.service"

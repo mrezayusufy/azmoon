@@ -1,12 +1,7 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
 import Login, { loginAction } from "../features/identity/components/login";
 import IdentityLayout from "../layouts/identity-layout";
-import Question from "../pages/question/question";
-import Score from "../pages/score/score";
-import Team from "../pages/team/team";
-import NotFound from "../pages/not-found";
-import UnhandledException from "../pages/unhandled-exception";
-import Welcome from "../components/welcom/index";
+import {Scores, Team, NotFound, UnhandledException, Welcome, QuestionPage} from "../pages";
 
 // Authentication loader
 const authLoader = async () => {
@@ -31,7 +26,7 @@ const router = createBrowserRouter([
       },
       {
         path: "question",
-        element: <Question />,
+        element: <QuestionPage />,
         loader: authLoader,
       },
       {
@@ -41,7 +36,7 @@ const router = createBrowserRouter([
       },
       {
         path: "score",
-        element: <Score />,
+        element: <Scores />,
         loader: authLoader,
       },
     ],

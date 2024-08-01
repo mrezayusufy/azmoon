@@ -10,17 +10,23 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.51.16",
     "axios": "^1.7.2",
-    "lodash": "^4.17.21",
-    "lottie-react": "^2.4.0",
+    "clsx": "^2.1.1",
+    "gsap": "^3.12.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.52.1",
     "react-i18next": "^15.0.0",
     "react-router-dom": "^6.25.1",
-    "react-toastify": "^10.0.5"
+    "react-toastify": "^10.0.5",
+    "sharp": "^0.33.4",
+    "sonner": "^1.5.0",
+    "tailwind-merge": "^2.4.0",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
+    "@types/node": "^18.19.42",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",

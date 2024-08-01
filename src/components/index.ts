@@ -1,0 +1,8 @@
+export { Option } from "./Option.component"
+export { Question } from "./Question.component"
+export { Timer } from "./Timer.component"
+export { Title } from "./Title.component"
+export { PersianInput } from "./PersianInput.component"
+export { Navbar } from "./Navbar.component"
+export { HostIntro } from "./HostIntro.component"
+export { LogoAnimation } from "./LogoAnimation.component"

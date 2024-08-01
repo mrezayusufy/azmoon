@@ -1,0 +1,1 @@
+export { type IQuestion, type IQuestionState, type IQuestionStore, type MainQuestionState, type IQuestionActions } from "./IQuestion"
