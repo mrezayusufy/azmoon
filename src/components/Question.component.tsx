@@ -17,7 +17,6 @@ export const Question: React.FC<Props> = ({question}) =>{
   
   useEffect(() => {
     if(question) setQuestion(question);
-    console.log(question)
     const handleKeyDown = (event: KeyboardEvent) => {
       if(event.key === 'r') setOrderId(1)
       if(event.key === 'i' || event.key === 'ه') setOrderId(orderId+1)

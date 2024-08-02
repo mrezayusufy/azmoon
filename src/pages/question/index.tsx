@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Question } from "../../components";
 import { getQuestion } from "../../services"
 import { useQuestionStore } from "../../store/useQuestionStore";
+import "./../../index.css";
 
 export const QuestionPage = () => {
   const { code, orderId } = useQuestionStore();
@@ -14,7 +15,11 @@ export const QuestionPage = () => {
   if (isError) return <div></div>
   if (isLoading) return <div></div>
 
-  return <div className="flex flex-col items-center align-bottom justify-end h-dvh w-full">
-    <Question question={response.data} />
-  </div>
+  return (
+  
+      <div className="flex flex-col items-center align-bottom justify-end h-dvh w-full ">
+        <Question question={response.data} />
+      </div>
+   
+  );
 }

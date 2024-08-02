@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  margin: 0;
+  font-family: Yekan;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.sidebar-link{
+  display: flex !important;
+}
+
+.rtl {
+  direction: rtl !important;
+}
 .content-question {
   @apply opacity-0 transition-opacity duration-100 absolute inset-0 pb-2 text-white left-1/2 -translate-x-1/2 w-full z-10  text-xl grid place-content-center;
 }
@@ -23,7 +36,14 @@
 .option-frame {
   @apply w-[160px] flex relative;
 }
+/* .checked {
+  font-variant-emoji: ;
+} */
 
+/* .text-size {
+  font-size: calc(1px + 1.2vw);
+  max-font-size: 10px;
+} */
 .login {
  display: flex;
  flex-flow: column;
