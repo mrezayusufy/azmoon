@@ -1,7 +1,8 @@
-import { useAppContext } from "@/contexts/app/app-context";
+import { useAppContext } from "@/contexts";
 import { NavLink } from "react-router-dom";
-import {LOGO} from "@/constants"
-import { Podium, QuestionIcon, ScoreIcon, TeamIcon } from "@/components"
+import { LOGO } from "@/constants"
+import { PodiumIcon, QuestionIcon, ScoreIcon, TeamIcon } from "@/components"
+import { cn } from "@/utils";
 
 const Sidebar = () => {
   const { showSidebar } = useAppContext();
@@ -9,25 +10,24 @@ const Sidebar = () => {
   return (
     <nav className={`sidebar ${!showSidebar ? "collapsed" : ""}`}>
       <div className="sidebar-content">
-        <a className="sidebar-brand d-flex flex-column align-items-center pt-0 mb-0">
-          <img src={LOGO} alt="logo" style={{ height: "80px" }} />
+        <div className={cn("text-blue-50 flex flex-col justify-center align-center items-center pt-0 mb-0")}>
+          <img src={LOGO} alt="logo" className="w-20"/>
           <p className="mb-0" style={{ fontSize: "90%" }}>
             برنامه آزمون
           </p>
-        </a>
+        </div>
 
         <ul className="sidebar-nav pe-0">
-          <li className="sidebar-header fw-bolder fs-lg">صفحات مسابقه</li>
+          <li className="sidebar-header fw-bolder fs-lg">دشبورد مسابقه</li>
           <li className="sidebar-item">
             <NavLink
               className={({ isActive }) =>
-                isActive ? "sidebar-link active" : "sidebar-link"
+                isActive ? "sidebar-link flex active" : "sidebar-link"
               }
               to={"/"}
-              target="_blank"
               rel="noopener noreferrer"
             >
-              <Podium width={size} height={size} />
+              <PodiumIcon width={size} height={size} />
               <span className="align-middle me-2">مدیریت مسابقه</span>
             </NavLink>
           </li>
@@ -37,7 +37,6 @@ const Sidebar = () => {
                 isActive ? "sidebar-link active" : "sidebar-link"
               }
               to={"/team"}
-              target="_blank"
               rel="noopener noreferrer"
             >
               <TeamIcon width={size} height={size}/>
@@ -50,7 +49,6 @@ const Sidebar = () => {
                 isActive ? "sidebar-link active" : "sidebar-link"
               }
               to={"/question"}
-              target="_blank"
               rel="noopener noreferrer"
             >
               <QuestionIcon width={size} height={size}/>
@@ -63,7 +61,6 @@ const Sidebar = () => {
                 isActive ? "sidebar-link active" : "sidebar-link"
               }
               to={"/score"}
-              target="_blank"
               rel="noopener noreferrer"
             >
               <ScoreIcon width={size} height={size}/>

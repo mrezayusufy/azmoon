@@ -32,7 +32,7 @@ export const LogoAnimation: React.FC = () => {
     };
   }, []);
 
-  return <div className='relative w-[250px]'>
-      <img ref={imgRef} src={LOGO_FRAMES[0]} alt="frame" className='object-contain' />
+  return <div className='login'>
+      <img ref={imgRef} src={LOGO_FRAMES[0]} alt="frame" className='object-contain w-[250px]' />
     </div>
 };

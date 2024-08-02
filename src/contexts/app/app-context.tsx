@@ -1,25 +1,19 @@
-import { useContext } from "react";
-import { useEffect } from "react";
-import { createContext, useReducer } from "react";
+import { ReactElement, useContext, useReducer, createContext, useEffect } from "react";
 import appReducer from "./app-reducer";
 
-const AppContext = createContext();
 const initialState = {
- 
   theme: localStorage.getItem("theme") || "light",
   showSidebar: true,
+  toggleSidebar: () => {}
 };
+const AppContext = createContext(initialState);
 
 // eslint-disable-next-line react/prop-types
-const AppProvider = ({ children }) => {
+const AppProvider = ({ children }: {children: ReactElement}) => {
 
   const [state, dispatch] = useReducer(appReducer, initialState);
 
  
-
-  const changeTheme = (theme) => {
-    dispatch({ type: "CHANGE_THEME", payload: theme });
-  };
 
   const toggleSidebar = () => {
     dispatch({ type: "TOGGLE_SIDEBAR" });
@@ -32,7 +26,7 @@ const AppProvider = ({ children }) => {
 
   return (
     <AppContext.Provider
-      value={{ ...state, changeTheme, toggleSidebar }}
+      value={{ ...state, toggleSidebar }}
     >
       {children}
     </AppContext.Provider>

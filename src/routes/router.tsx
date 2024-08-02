@@ -1,7 +1,7 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
-import Login from "../features/identity/components/login";
-import IdentityLayout from "../layouts/identity-layout";
-import {Scores, Team, NotFound, UnhandledException, Welcome, QuestionPage} from "../pages";
+import { Login } from "@/components";
+import {Scores, Team, NotFound, Welcome, QuestionPage} from "@/pages";
+import { MainLayout, IdentityLayout} from "@/layouts"
 const authLoader = async () => {
   const gameStorage = JSON.parse(localStorage.getItem("game-storage") as string)
   const code = gameStorage.state.code;
@@ -14,31 +14,29 @@ const authLoader = async () => {
 const router = createBrowserRouter([
   {
     path: "/",
-    errorElement: <UnhandledException />,
+    element: <MainLayout />,
     children: [
       {
         index: true,
-        element: (
-            <Welcome />
-        ),
-        loader: authLoader,
-      },
-      {
-        path: "question",
-        element: <QuestionPage />,
-        loader: authLoader,
-      },
-      {
-        path: "team",
-        element: <Team />,
-        loader: authLoader,
-      },
-      {
-        path: "score",
-        element: <Scores />,
+        element: <Welcome />,
         loader: authLoader,
       },
     ],
+  },
+  {
+    path: "question",
+    element: <QuestionPage />,
+    loader: authLoader,
+  },
+  {
+    path: "team",
+    element: <Team />,
+    loader: authLoader,
+  },
+  {
+    path: "score",
+    element: <Scores />,
+    loader: authLoader,
   },
   {
     element: <IdentityLayout />,

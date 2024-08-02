@@ -9,11 +9,10 @@ type FormData = {
   code: string;
 };
 
-const Login: React.FC = () => {
+export const Login: React.FC = () => {
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>();
   const navigate = useNavigate();
   const routeErrors = useRouteError() as any;
-  console.log(process.env.API_URL)
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     try {
       const response = await getTeam(data.code);
@@ -29,13 +28,13 @@ const Login: React.FC = () => {
 
   return (
     <>
-      <div className="text-center mt-4 login">
+      <div className="text-center mb-4 login">
         <LogoAnimation />
         <h1 className="h2">ورود به بازی</h1>
         <p className="lead">آزمون</p>
       </div>
 
-      <div className="card">
+      <div className="card shadow-xl !rounded-xl">
         <div className="card-body">
           <div className="m-sm-4">
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -69,5 +68,4 @@ const Login: React.FC = () => {
     </>
   );
 };
-
-export default Login;
+ 

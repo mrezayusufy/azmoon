@@ -1,4 +1,4 @@
-export const Podium = (props: any) => <svg fill="currentColor" {...props} xmlns="http://www.w3.org/2000/svg"  
+export const PodiumIcon = (props: any) => <svg fill="currentColor" {...props} xmlns="http://www.w3.org/2000/svg"  
 viewBox="0 0 389.459 389.459"  >
 <g>
 <path d="M350.051,311.456H252.25v-60.459c0-4.759-3.872-8.63-8.631-8.63H137.663c-4.759,0-8.631,3.872-8.631,8.63v32.823H39.408

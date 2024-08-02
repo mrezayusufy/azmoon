@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { Question } from "../../components";
-import { getQuestion } from "../../services"
-import { useQuestionStore } from "../../store/useQuestionStore";
+import { Question } from "@/components";
+import { getQuestion } from "@/services"
+import { useQuestionStore } from "@/store";
 
 export const QuestionPage = () => {
   const { code, orderId } = useQuestionStore();

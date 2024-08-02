@@ -19,7 +19,7 @@ export const useQuestionStore = create<IQuestionState & IQuestionActions>()(
       setAnswer: (answer: string) => set({answer}),
       setCode: (code: string) => set({ code }),
       setSelectedAnswer: (answer: string) => set({ selectedAnswer: answer }),
-      checkAnswer: () => set((state) => {
+      checkAnswer: () => set((state: IQuestionState) => {
         if (!state.question) return { answerChecked: true };
         const correct = state.question.correctAnswer;
         const isCorrect = state.selectedAnswer === correct;
@@ -32,6 +32,20 @@ export const useQuestionStore = create<IQuestionState & IQuestionActions>()(
     }),
     {
       name: 'game-storage', 
+      onRehydrateStorage: (state: any) => {
+        const style = (color = "#3ca015") => `background-color: ${color}; padding: 5px 30px; border-radius: 20px; font-size: 14px`;
+        console.log('%chydration starts', style())
+        // optional
+        return (state: any, error: any) => {
+          console.log(state.selectedAnswer)
+          console.log("question_id",state.question.id)
+          if (error) {
+            console.log('an error happened during hydration', error)
+          } else {
+            console.log('%chydration finished', style("#d9534f"))
+          }
+        }
+      },
     }
   )
 );

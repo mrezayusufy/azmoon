@@ -1,14 +1,9 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Sidebar from "./sidebar";
 import TopNav from "./top-nav";
 
-const MainLayout = () => {
-  const navigate = useNavigate();
-  const token = localStorage.getItem("code");
-  if (!token) {
-    return navigate("/login", { replace: true });
-  }
-
+export const MainLayout = () => {
+  
   return (
     <div className="wrapper" style={{ minHeight: "100vh" }}>
       <Sidebar />
@@ -24,7 +19,7 @@ const MainLayout = () => {
             <div className="row">
               <div className="col-12">
                 <p className="mb-0">
-                  © 2024 - <a className="text-muted">وب فلو</a>
+                  © 2024 - <a className="text-muted">آزمون</a>
                 </p>
               </div>
             </div>
@@ -34,5 +29,4 @@ const MainLayout = () => {
     </div>
   );
 };
-
-export default MainLayout;
+ 

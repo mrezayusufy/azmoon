@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { Navbar } from "../../components"; 
-import { useQuestionStore } from "../../store";
+import { useQuestionStore } from "@/store";
 import { toast } from "sonner";
 
 export const Home = () => { 
-  const {answer, orderId, code: gameCode, setOrderId, setCode : setGameCode, setSelectedAnswer } = useQuestionStore((state) => ({
+  const {answer, orderId, code: gameCode, setOrderId, setCode : setGameCode, setSelectedAnswer } = useQuestionStore((state: any) => ({
     answer: state.answer,
     orderId: state.orderId,
     code: state.code,
@@ -53,8 +52,7 @@ export const Home = () => {
       icon: "✅",
     });
   };
-  return <>
-      <Navbar />
+  return <> 
       <div className="flex flex-col items-center justify-end w-full text-right  ">
           <form onSubmit={handleSetCode} className="mt-3 flex flex-col">
             <label className="flex flex-col mb-3">

@@ -1,12 +1,13 @@
-import { useAppContext } from "../../contexts/app/app-context";
+import { useAppContext } from "@/contexts";
+import { useQuestionStore } from "@/store"
 import { useNavigate } from "react-router";
 
 const TopNav = () => {
   const { toggleSidebar } = useAppContext();
   const navigate = useNavigate();
-
+  
   const logout = () => {
-    localStorage.removeItem("code");
+    useQuestionStore.getState().setCode("");
     navigate("/login");
   };
 

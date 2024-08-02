@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { Option } from "./Option.component";
-import { IQuestion } from "../interfaces";
+import { IQuestion } from "@/interfaces";
 import { QuestionItem } from "./QuestionItem.component";
-import { useQuestionStore } from "../store";
+import { useQuestionStore } from "@/store";
 import { Timer } from "./Timer.component";
-import { cn } from "../utils";
+import { cn } from "@/utils";
 import { OptionItem } from "./OptionItem.component";
 interface Props {
   question: IQuestion;
@@ -17,7 +17,7 @@ export const Question: React.FC<Props> = ({question}) =>{
   
   useEffect(() => {
     if(question) setQuestion(question);
-    console.log(question)
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if(event.key === 'r') setOrderId(1)
       if(event.key === 'i' || event.key === 'ه') setOrderId(orderId+1)
@@ -69,7 +69,7 @@ export const Question: React.FC<Props> = ({question}) =>{
       </div>
       })}
   </section>
-  <div className="absolute right-0 bottom-0 w-[500px]">
+  <div className="absolute right-0 bottom-0 w-[320px] lg:w-[500px]">
     <Timer timer={question.timer} />
   </div>
 </section>

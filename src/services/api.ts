@@ -1,5 +1,4 @@
 
-// @ts-ignore
 const BASE_URL: string = "http://173.249.57.172:1403/api"  as string;
 // Api.ts
 export class Api {
@@ -10,7 +9,13 @@ export class Api {
   }
 
   async get(endpoint: string): Promise<any> {
-    const response = await fetch(`${this.baseUrl}${endpoint}`);
+    const response = await fetch(`${this.baseUrl}${endpoint}`, {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
@@ -22,6 +27,7 @@ export class Api {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify(data),
     });

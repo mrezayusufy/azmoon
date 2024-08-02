@@ -1,4 +1,4 @@
-const appReducer = (state, action) => {
+const appReducer = (state: any, action: any) => {
   switch (action.type) {
     case "CHANGE_LANGUAGE": {
       return {

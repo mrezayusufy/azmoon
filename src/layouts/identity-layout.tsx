@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom";
 
-const IdentityLayout = () => {
+export const IdentityLayout = () => {
   return (
     <>
-      <div className="main d-flex justify-content-center w-100">
+      <div className="main d-flex justify-content-center w-100 bg-blue-50">
         <main className="content d-flex p-0">
           <div className="container d-flex flex-column">
             <div className="row h-100">
@@ -18,6 +18,4 @@ const IdentityLayout = () => {
       </div>
     </>
   );
-};
-
-export default IdentityLayout;
+}; 
