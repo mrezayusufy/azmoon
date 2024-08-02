@@ -15,8 +15,8 @@ export const QuestionPage = () => {
     staleTime: 5000,
   });
 
-  if (isError) return <div></div>;
-  if (isLoading) return <div></div>;
+  if (isError) return null;
+  if (isLoading) return null;
 
   return (
     <div className="flex flex-col items-center align-bottom justify-end h-dvh w-full ">

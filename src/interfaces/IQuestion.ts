@@ -20,6 +20,8 @@ export interface IQuestionState {
   orderId: number,
 }
 export interface IQuestionActions {
+  incrementOrderId: () => void,
+  reset: () => void,
   setCode: (code: string) => void,
   checkAnswer: () => void,
   setQuestion: (question: IQuestion) => void,

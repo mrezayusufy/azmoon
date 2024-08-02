@@ -3,6 +3,7 @@
 @tailwind utilities;
 body {
   background-color: transparent !important;
+  height: 100dvh;
 }
 * {
   user-select: none;
