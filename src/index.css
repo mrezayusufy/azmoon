@@ -15,6 +15,13 @@ body {
 .rtl {
   direction: rtl !important;
 }
+.content-question{
+font-size: 16px;
+text-align: center;
+justify-content: center;
+align-items: center;
+padding: 2px;
+}
 .content-question {
   @apply opacity-0 transition-opacity duration-100 absolute  pb-2 text-white left-1/2 -translate-x-1/2 w-full z-10  text-xl grid place-content-center;
 }
