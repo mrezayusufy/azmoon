@@ -4,7 +4,7 @@
 
 body {
   margin: 0;
-  font-family: Yekan;
+  font-family: iranyekan;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -16,7 +16,7 @@ body {
   direction: rtl !important;
 }
 .content-question {
-  @apply opacity-0 transition-opacity duration-100 absolute inset-0 pb-2 text-white left-1/2 -translate-x-1/2 w-full z-10  text-xl grid place-content-center;
+  @apply opacity-0 transition-opacity duration-100 absolute  pb-2 text-white left-1/2 -translate-x-1/2 w-full z-10  text-xl grid place-content-center;
 }
 .shape-mode {
   @apply absolute inset-0 mix-blend-hue pr-0.5 pt-0.5;
@@ -40,10 +40,7 @@ body {
   font-variant-emoji: ;
 } */
 
-/* .text-size {
-  font-size: calc(1px + 1.2vw);
-  max-font-size: 10px;
-} */
+
 .login {
  display: flex;
  flex-flow: column;
@@ -55,4 +52,9 @@ body {
   aspect-ratio: 1/1 !important;
   filter: drop-shadow(0 0 12px #02020242);
  }
+}
+.p{
+    font-size: 16px;
+    text-align: center;
+    padding: 3px;
 }

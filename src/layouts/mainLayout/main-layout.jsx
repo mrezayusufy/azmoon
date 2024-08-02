@@ -1,7 +1,7 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import Sidebar from "./sidebar";
 import TopNav from "./top-nav";
-
+import "./../../../public/css/light.css";
 const MainLayout = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("code");

@@ -7,18 +7,7 @@ import { QueryClient } from "@tanstack/react-query";
 
 
 const App = () => {
-  const { theme } = useAppContext();
-  useEffect(() => {
-    const head = document.head;
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = `/css/${theme}.css`;
-    head.appendChild(link);
-
-    return () => {
-      head.removeChild(link);
-    };
-  }, [theme]);
+ 
 const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>

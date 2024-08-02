@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-
+import "./../../public/css/light.css";
 const IdentityLayout = () => {
   return (
     <>
