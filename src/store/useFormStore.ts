@@ -6,6 +6,7 @@ interface FormState {
   typedAnswer: string;
   announcer: string;
   setOrderId: (orderId: number) => void;
+  incrementOrderId: () => void;
   setTypedAnswer: (typedAnswer: string) => void;
   setAnnouncer: (announcer: string) => void;
 }
@@ -13,16 +14,17 @@ interface FormState {
 export const useFormStore = create<FormState>()(
   persist(
     (set) => ({
-      orderId: 0,
+      orderId: 1,
       typedAnswer: "",
       announcer: "",
       setOrderId: (orderId: number) => set({ orderId }),
+      incrementOrderId: () => set((state) => ({ orderId: state.orderId + 1 })),
       setTypedAnswer: (typedAnswer: string) => set({ typedAnswer }),
       setAnnouncer: (announcer: string) => set({ announcer }),
     }),
     {
-      name: "form-storage", // کلید برای ذخیره‌سازی در localStorage
-      getStorage: () => localStorage, // استفاده از localStorage به طور پیش‌فرض
+      name: "form-storage", // Key for storing in localStorage
+      getStorage: () => localStorage, // Use localStorage by default
     }
   )
 );

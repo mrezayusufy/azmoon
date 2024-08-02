@@ -12,8 +12,7 @@ interface Props {
 }
 export const Question: React.FC<Props> = ({question}) =>{ 
   const { setQuestion, answerChecked, selectedAnswer } = useQuestionStore();
-    const { setOrderId , orderId } =
-      useFormStore();
+  const { setOrderId, incrementOrderId, orderId } = useFormStore();
   const updateStore = () => {
     useQuestionStore.persist.rehydrate()
   }
@@ -22,7 +21,7 @@ export const Question: React.FC<Props> = ({question}) =>{
     if(question) setQuestion(question);
     const handleKeyDown = (event: KeyboardEvent) => {
       if(event.key === 'r') setOrderId(1)
-      if(event.key === 'i' || event.key === 'ه') setOrderId(orderId+1)
+      if(event.key === 'i' || event.key === 'ه') incrementOrderId();
     }
     window.addEventListener('keydown', handleKeyDown);
     document.addEventListener("visibilitychange", updateStore);
