@@ -8,7 +8,7 @@ export const Title = ({ text, maxLength }: TitleProps) => {
 
   useEffect(() => {
     if (text.length > maxLength) {
-      const newFontSize = Math.max(16 - (text.length - maxLength) * 0.1, 12);
+      const newFontSize = Math.max(19 - (text.length - maxLength) * 0.1, 12);
       setFontSize(`${newFontSize}px`);
     } else {
       setFontSize('16px');

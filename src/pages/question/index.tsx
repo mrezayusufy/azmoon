@@ -1,10 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { Question } from "../../components";
 import { getQuestion } from "../../services"
+import { useFormStore } from "../../store/useFormStore";
 import { useQuestionStore } from "../../store/useQuestionStore";
-
 export const QuestionPage = () => {
-  const { code, orderId } = useQuestionStore();
+  const { orderId } = useFormStore();
+  const { code } = useQuestionStore();
+
   const {
     data: response,
     isError,

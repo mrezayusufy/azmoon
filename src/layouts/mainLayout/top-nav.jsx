@@ -12,7 +12,7 @@ const TopNav = () => {
 
     // پاک کردن وضعیت‌ها
     setCode("");
-    setOrderId(0);
+    setOrderId(1);
     setTypedAnswer("");
     setAnnouncer("");
 
@@ -23,7 +23,7 @@ const TopNav = () => {
   return (
     <nav className="navbar navbar-expand navbar-light navbar-bg">
       <div className="d-flex align-items-center gap-3">{/* سایر عناصر */}</div>
-      <div className="me-auto">
+      <div className="mr-auto">
         <button
           className="btn ms-2 btn-outline-danger fw-bolder"
           onClick={logout}
