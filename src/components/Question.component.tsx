@@ -3,6 +3,7 @@ import { Option } from "./Option.component";
 import { IQuestion } from "../interfaces";
 import { QuestionItem } from "./QuestionItem.component";
 import { useQuestionStore } from "../store";
+import { useFormStore } from "../store";
 import { Timer } from "./Timer.component";
 import { cn } from "../utils";
 import { OptionItem } from "./OptionItem.component";
@@ -10,7 +11,9 @@ interface Props {
   question: IQuestion;
 }
 export const Question: React.FC<Props> = ({question}) =>{ 
-  const { setOrderId, setQuestion, answerChecked, selectedAnswer, orderId} = useQuestionStore();
+  const { setQuestion, answerChecked, selectedAnswer } = useQuestionStore();
+    const { setOrderId , orderId } =
+      useFormStore();
   const updateStore = () => {
     useQuestionStore.persist.rehydrate()
   }
