@@ -32,7 +32,7 @@ const Login: React.FC = () => {
       <div className="text-center mt-4 login">
         <LogoAnimation />
         <h1 className="h2">ورود به بازی</h1>
-        <p className="lead">آزمون</p>
+        <p className="lead"></p>
       </div>
 
       <div className="card">
