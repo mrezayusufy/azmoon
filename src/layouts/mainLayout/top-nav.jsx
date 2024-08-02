@@ -1,23 +1,28 @@
-import { useAppContext } from "../../contexts/app/app-context";
+import { useFormStore } from "@/store/useFormStore";
+import { useQuestionStore } from "@/store/useQuestionStore";
 import { useNavigate } from "react-router";
 
 const TopNav = () => {
-  const { toggleSidebar } = useAppContext();
   const navigate = useNavigate();
-
+  const { setOrderId, setTypedAnswer, setAnnouncer } = useFormStore();
+  const { setCode } = useQuestionStore();
   const logout = () => {
+    // پاک کردن localStorage
     localStorage.removeItem("code");
+
+    // پاک کردن وضعیت‌ها
+    setCode("");
+    setOrderId(0);
+    setTypedAnswer("");
+    setAnnouncer("");
+
+    // هدایت به صفحه ورود
     navigate("/login");
   };
 
   return (
     <nav className="navbar navbar-expand navbar-light navbar-bg">
-      <a className="sidebar-toggle" onClick={toggleSidebar}>
-        <i className="hamburger align-self-center"></i>
-      </a>
-      <div className="d-flex align-items-center gap-3">
-       
-      </div>
+      <div className="d-flex align-items-center gap-3">{/* سایر عناصر */}</div>
       <div className="me-auto">
         <button
           className="btn ms-2 btn-outline-danger fw-bolder"
