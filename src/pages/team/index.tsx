@@ -1,6 +1,8 @@
-import React from "react"
+import "./../../index.css";
 export const Team = () => {
-  return <>
-    <div>Team is page</div>
-  </>
-}
+  return (
+    <>
+      <div>Team is page</div>
+    </>
+  );
+};

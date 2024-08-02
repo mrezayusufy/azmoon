@@ -17,14 +17,14 @@ export class Api {
       },
     });
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      throw new Error("Network response was not ok");
     }
     return response.json();
   }
 
   async post(endpoint: string, data: any): Promise<any> {
     const response = await fetch(`${this.baseUrl}${endpoint}`, {
-      method: 'POST',
+      method: "POST",
       headers: {
         'Content-Type': 'application/json',
         "Access-Control-Allow-Origin": "*",
@@ -32,9 +32,8 @@ export class Api {
       body: JSON.stringify(data),
     });
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      throw new Error("Network response was not ok");
     }
     return response.json();
   }
 }
- 

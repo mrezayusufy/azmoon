@@ -1,4 +1,5 @@
 import { useQuestionStore } from "@/store";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "sonner"
@@ -7,8 +8,13 @@ export const Welcome = () => {
   const {
     register: registerOrderId,
     handleSubmit: handleSubmitOrderId,
-    formState: { errors: errorsOrderId },
-  } = useForm();
+    setValue: setValueOrderId,
+    formState: { errors: errorsOrderId, isSubmitting: isSubmittingOrderId },
+  } = useForm({
+    defaultValues: {
+      orderId: useQuestionStore.getState().orderId,
+    },
+  });
 
   const {
     register: registerAnswer,
@@ -31,6 +37,21 @@ export const Welcome = () => {
       autoClose: 5000,
     });
   };
+
+  const onSubmitAnnouncer: SubmitHandler<AnnouncerFormData> = (data) => {
+    setAnnouncer(data.announcer);
+    toast.success("نام گوینده بازی با موفقیت ثبت شد", {
+      position: "top-center",
+      autoClose: 5000,
+    });
+  };
+
+  // Sync form values with zustand store
+  useEffect(() => {
+    setValueOrderId("orderId", useFormStore.getState().orderId);
+    setValueTypedAnswer("typedAnswer", useFormStore.getState().typedAnswer);
+    setValueAnnouncer("announcer", useFormStore.getState().announcer);
+  }, [setValueOrderId, setValueTypedAnswer, setValueAnnouncer]);
 
   return (
     <div className="container mt-5">
@@ -100,5 +121,4 @@ export const Welcome = () => {
         </div>
       </div>
     </div>
-  );
-}; 
+};

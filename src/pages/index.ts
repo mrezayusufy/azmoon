@@ -1,4 +1,3 @@
-export { Home } from "./home";
 export { HostIntroPage } from "./host-introduction";
 export { Introduction } from "./introduction";
 export { Scores } from "./scores";
