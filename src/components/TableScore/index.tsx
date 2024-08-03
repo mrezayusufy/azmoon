@@ -1,14 +1,14 @@
 import React, { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
-import { OPTION } from '@/constants';
-import { cn } from '@/utils';
-import { Title } from './Title.component';
+import { TABLE_SCORE } from '@/constants';
 import { useAppContext } from '@/contexts';
-type OptionProp = {
-  content: string;
-  color: string; 
+import { ITeam } from '@/interfaces';
+import { _p } from '@/utils';
+type Props = {
+  item: ITeam;
+
 }
-export const Option: React.FC<OptionProp> = ({ content, color }: OptionProp) => {
+export const TableScore: React.FC<Props> = ({ item }) => {
   const {setAnswer, checkAnswer, state} = useAppContext();
   const imgRef = useRef<HTMLImageElement | null>(null);
   const textRef = useRef<HTMLDivElement | null>(null);
@@ -18,14 +18,14 @@ export const Option: React.FC<OptionProp> = ({ content, color }: OptionProp) => 
     // Initialize GSAP timeline
     tl.current = gsap.timeline({ paused: true });
 
-    OPTION.forEach((frame, index) => {
+    TABLE_SCORE.forEach((frame, index) => {
       tl.current!.to(imgRef.current, {
         duration: 0.04, // adjust duration as needed
         onUpdate: () => {
           (imgRef.current) && (imgRef.current.src = frame);
-          (index >= OPTION.length - 20 && textRef.current) && 
+          (index >= TABLE_SCORE.length - 20 && textRef.current) && 
             gsap.to(textRef.current, { opacity: 1, duration: 0.5 });
-          (index !== OPTION.length - 1 && textRef.current) &&
+          (index !== TABLE_SCORE.length - 1 && textRef.current) &&
             gsap.to(textRef.current, { opacity: 0, duration: 0.05 });
         },
       });
@@ -39,9 +39,9 @@ export const Option: React.FC<OptionProp> = ({ content, color }: OptionProp) => 
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      (event.key === 'a' || event.key === 'ش') &&
+      (event.key === 's' || event.key === 'س') &&
         playAnimation();
-      (event.shiftKey && (event.key === 'A' || event.key === 'َ')) &&
+      (event.shiftKey && (event.key === 'S' || event.key === 'ُ')) &&
         reverseAnimation();
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -49,10 +49,7 @@ export const Option: React.FC<OptionProp> = ({ content, color }: OptionProp) => 
       window.removeEventListener('keydown', handleKeyDown);
     };
 
-  }, []);
-  const onChoose = () => {
-    setAnswer(content);
-  }
+  }, []); 
   const reverseAnimation = () => {
     tl.current?.reverse();
     checkAnswer(false);
@@ -62,11 +59,13 @@ export const Option: React.FC<OptionProp> = ({ content, color }: OptionProp) => 
     tl.current?.play();
   }
   return (
-    <div className='option' onClick={onChoose}>
-      <p ref={textRef}>
-        {content}      
-      </p>
-      <img ref={imgRef} src={OPTION[0]}  alt="frame" className={cn('object-contain', color)} />
+    <div className='relative w-[330px]' >
+      <div ref={textRef} className='absolute gap-x-4 grid-cols-8 text-white inset-0 grid grid-flow-col px-4 py-2 mt-0.5'>
+        <span className='col-span-1 text-center'>{_p(item.teamId)}</span>
+        <span className='col-span-5'>{item.name}</span>
+        <span className='col-span-2'>{_p(item.score)}</span>  
+      </div>
+      <img ref={imgRef} src={TABLE_SCORE[0]}  alt="frame" className="object-contain" />
     </div>
   );
 };

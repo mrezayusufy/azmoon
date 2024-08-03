@@ -1,14 +1,11 @@
 import { useAppContext } from "@/contexts";
-import { useFormStore, useQuestionStore } from "@/store";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner"
 export const Welcome = () => {
-  const { state, setOrderId, setAnswer } = useAppContext();
-  const setAnnouncer = useFormStore(_ => _.setAnnouncer);
+  const { state, setOrderId, setAnswer, setAnnouncer } = useAppContext();
   const {
     register: registerOrderId,
     handleSubmit: handleSubmitOrderId,
-    setValue: setValueOrderId,
     formState: { errors: errorsOrderId, isSubmitting: isSubmittingOrderId },
   } = useForm({
     defaultValues: {
@@ -32,7 +29,7 @@ export const Welcome = () => {
     formState: { errors: errorsAnnouncer },
   } = useForm({
     defaultValues: {
-      announcer: useFormStore.getState().announcer,
+      announcer: state.announcer,
     },
   });
 

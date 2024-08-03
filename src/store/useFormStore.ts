@@ -7,14 +7,8 @@ interface FormState {
 }
 
 export const useFormStore = create<FormState>()(
-  persist(
     (set) => ({
       announcer: "",
       setAnnouncer: (announcer: string) => set({ announcer }),
-    }),
-    {
-      name: "form-storage", // Key for storing in localStorage
-      getStorage: () => localStorage, // Use localStorage by default
-    }
+    })
   )
-);

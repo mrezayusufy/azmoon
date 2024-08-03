@@ -5,10 +5,9 @@ import { useQuestionStore } from "@/store";
 import { useAppContext } from "@/contexts";
 export const QuestionPage = () => {
   const {state}= useAppContext();
-  const { code, orderId } = useQuestionStore(_ => ({code: _.code, orderId: _.orderId}));
 
   const {
-    data: response,
+    data,
     isError,
     isLoading,
   } = useQuery({
@@ -16,12 +15,12 @@ export const QuestionPage = () => {
     queryFn: () => getQuestion(state.code, state.orderId.toString()),
     staleTime: 5000,
   });
-  if (isError) return null;
+  if (isError && !data) return null;
   if (isLoading) return null;
 
   return (
     <div className="flex flex-col items-center align-bottom justify-end h-full w-full ">
-      <Question question={response.data} />
+      <Question question={data.data} />
     </div>
   );
 }

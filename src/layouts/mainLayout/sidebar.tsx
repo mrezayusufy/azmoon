@@ -6,6 +6,7 @@ import { cn } from "@/utils";
 
 const Sidebar = () => {
   const { state } = useAppContext();
+  
   const size = 24;
   return (
     <nav className={`sidebar ${!state.showSidebar ? "collapsed" : ""}`}>

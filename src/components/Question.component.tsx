@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Option } from "./Option.component";
 import { IQuestion } from "@/interfaces";
 import { QuestionItem } from "./QuestionItem.component";
-import { useQuestionStore } from "@/store";
 import { Timer } from "./Timer.component";
 import { cn } from "@/utils";
 import { OptionItem } from "./OptionItem.component";

@@ -1,0 +1,1 @@
+export const _p = (d: number) => new Intl.NumberFormat('fa-IR').format(d)

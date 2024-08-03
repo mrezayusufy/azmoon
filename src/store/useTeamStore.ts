@@ -6,13 +6,8 @@ const INITIAL_STATE: ITeamState = {
 }
 
 export const useTeamStore = create<ITeamState & ITeamAction>()(
-  persist(
     (set) => ({
       ...INITIAL_STATE,
       setTeams: (teams: ITeam[]) => set({teams})
-    }),
-    {
-      name: 'teams-storage', 
-    }
-  )
+    })
 );

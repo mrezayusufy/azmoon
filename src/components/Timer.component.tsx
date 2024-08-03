@@ -8,15 +8,15 @@ type Props = {
 }
 
 export const Timer: React.FC<Props> = ({ timer }) => {
-  const [countdown, setCountdown] = useState(timer);
+  const {checkAnswer}= useAppContext()
   const countdownRef = useRef<NodeJS.Timeout | null>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);
   const textRef = useRef<HTMLDivElement | null>(null);
   const tl = useRef<GSAPTimeline | null>(null);
-  const {checkAnswer}= useAppContext()
+  const [countdown, setCountdown] = useState(timer);
+
   useEffect(() => {
     tl.current = gsap.timeline({ paused: true });
-
     TIMER.forEach((frame, index) => {
       tl.current!.to(imgRef.current, {
         duration: 0.04, 
@@ -83,7 +83,7 @@ export const Timer: React.FC<Props> = ({ timer }) => {
 
   const reverseAnimation = () => {
     tl.current?.reverse();
-    checkAnswer(1)
+    checkAnswer(true)
     setTimeout(() => {
       setCountdown(timer);
     }, 5000);

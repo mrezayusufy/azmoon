@@ -1,34 +1,41 @@
-import { IQuestion } from "@/interfaces";
+import { IQuestion, ITeam } from "@/interfaces";
 
-// types.ts
 export type State = {
   orderId: number;
   code: string;
-  showSidebar: boolean;
   isChecked: boolean;
   answer: string;
-  question: IQuestion;
-  isCorrect: boolean;
+  question: IQuestion | null;
+  announcer: string;
   selected: string;
+  team: ITeam | null;
+  showSidebar: boolean;
 };
 
 export type Action =
   | { type: 'SET_ORDER_ID'; payload: number }
+  | { type: 'INCREMENT_ORDER_ID' }
   | { type: 'SET_CODE'; payload: string }
   | { type: 'SET_SELECTED'; payload: string }
+  | { type: 'SET_ANNOUNCER'; payload: string }
+  | { type: 'SET_TEAM'; payload: ITeam }
   | { type: 'TOGGLE_SIDEBAR' }
   | { type: 'RESET' }
-  | { type: 'CHECK_ANSWER', payload: number}
+  | { type: 'CHECK_ANSWER', payload: {isChecked: boolean}}
   | { type: 'SET_QUESTION', payload: IQuestion }
   | { type: 'SET_ANSWER', payload: string };
 
 export type ContextProps = {
   state: State;
   dispatch: React.Dispatch<Action>;
-  setQuestion: (question: IQuestion) => void;
-  setAnswer: (answer: string) => void,
-  setCode: (code: string) => void,
-  setOrderId: (orderId: number) => void,
-  checkAnswer: (condition: number) => void,
-  setSelected: (selected: string) => void,
+  setQuestion: (value: IQuestion) => void;
+  setAnswer: (value: string) => void,
+  setCode: (value: string) => void,
+  setOrderId: (value: number) => void,
+  checkAnswer: (value: boolean) => void,
+  setSelected: (value: string) => void,
+  setTeam: (value: ITeam) => void,
+  reset: () => void,
+  toggleSidebar: () => void,
+  setAnnouncer: (value: string) => void,
 };

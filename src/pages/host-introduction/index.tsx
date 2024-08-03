@@ -1,15 +1,11 @@
-import { useEffect } from "react";
-import {HostIntro} from "../../components";
-import { useFormStore } from "@/store/useFormStore";
+import {HostIntro} from "@/components";
+import { useAppContext } from "@/contexts";
 
 export const HostIntroPage = () => {
-  let announcer = "";
-    useEffect(() => {
-      announcer= useFormStore.getState().announcer;
-    }, [announcer]);
+  const {state} = useAppContext();
   return (
     <div className="flex flex-col items-end h-full justify-end px-10">
-      <HostIntro title={announcer} subtitle="گوینده" />
+      <HostIntro title={state.announcer} subtitle="گوینده" />
     </div>
   );
 }

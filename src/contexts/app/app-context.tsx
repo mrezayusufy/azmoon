@@ -1,45 +1,27 @@
 import React, { createContext, useReducer, ReactNode, useContext, useEffect } from 'react';
 import { ContextProps } from '@/types';
 import { initialState, reducer } from './app-reducer';
-import { IQuestion } from '@/interfaces';
+import { IQuestion, ITeam } from '@/interfaces';
 
 const AppContext = createContext<ContextProps | undefined>(undefined);
 
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  // actions
   const incrementOrderId = () => {
-    dispatch({type: "SET_ORDER_ID", payload: state.orderId + 1})
+    dispatch({type: "INCREMENT_ORDER_ID"})
   }
-  const onStorageUpdate = (e: StorageEvent) => {
-    const { key, newValue } = e as {key: string, newValue: string};
-    if (key === "orderId") {
-      dispatch({type: "SET_ORDER_ID", payload: parseInt(newValue) });
-    } else if (key === "answer") {
-      dispatch({type: "SET_ANSWER", payload: newValue});
-    } else if (key === "question") {
-      dispatch({type: "SET_QUESTION", payload: JSON.parse(newValue)});
-    } else if (key === "isChecked") {
-      dispatch({type: "CHECK_ANSWER", payload: JSON.parse(newValue)});
-    } else if (key === "code") {
-      dispatch({type: "SET_CODE", payload: newValue});
-    } else if (key === "selected") {
-      dispatch({type: "SET_SELECTED", payload: newValue});
-    }
-  };
-  const eventListener = (event: KeyboardEvent) => {
-    if (event.key === "i" || event.key === "ه") incrementOrderId();
-    if (event.key === "y" || event.key === "غ") document.location.replace("/")
-  }
-  useEffect(() => {
-    window.addEventListener("keydown", eventListener)
-    window.addEventListener("storage", onStorageUpdate);
-    return () => {
-      window.removeEventListener("keydown", eventListener)
-      window.removeEventListener("storage", onStorageUpdate);
-    };
-  },[])
   const setQuestion = (question: IQuestion) => {
     dispatch({type: "SET_QUESTION", payload: question})
+  }
+  const setTeam = (value: ITeam) => {
+    dispatch({type: "SET_TEAM", payload: value})
+  }
+  const reset = () => {
+    dispatch({type: "RESET"})
+  }
+  const toggleSidebar = () => {
+    dispatch({type: "TOGGLE_SIDEBAR"})
   }
   const setSelected = (selected: string) => {
     dispatch({type: "SET_SELECTED", payload: selected})
@@ -47,8 +29,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const setAnswer = (answer: string) => {
     dispatch({type: "SET_ANSWER", payload: answer})
   }
-  const checkAnswer = (condition = 0) => {
-    dispatch({type: "CHECK_ANSWER", payload: condition})
+  const checkAnswer = (value: boolean) => {
+    dispatch({type: "CHECK_ANSWER", payload: {isChecked: value}})
   }
   const setCode = (code: string) => {
     dispatch({type: "SET_CODE", payload: code})
@@ -57,14 +39,56 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     dispatch({type: "SET_ORDER_ID", payload: orderId})
   }
   
+  const setAnnouncer = (value: string) => {
+    dispatch({type: "SET_ANNOUNCER", payload: value})
+  }
+  // sync localstorage
+  const onStorageUpdate = (e: StorageEvent) => {
+    const { key, newValue } = e as {key: string, newValue: string};
+    if (key === "orderId") {
+      setOrderId(parseInt(newValue));
+    } else if (key === "announcer") {
+      setAnnouncer(newValue);
+    } else if (key === "answer") {
+      setAnswer(newValue);
+    } else if (key === "question") {
+      setQuestion(JSON.parse(newValue))
+    } else if (key === "isChecked") {
+      checkAnswer(JSON.parse(newValue));
+    } else if (key === "code") {
+      setCode(newValue);
+    } else if (key === "selected") {
+      setSelected(newValue);
+    }
+  };
+  // keyboard event handler for increment and nav to home page
+  const eventListener = (event: KeyboardEvent) => {
+    if (event.key === "i" || event.key === "ه") incrementOrderId();
+    if (event.key === "y" || event.key === "غ") document.location.replace("/")
+  }
+
+  useEffect(() => {
+    window.addEventListener("keydown", eventListener)
+    window.addEventListener("storage", onStorageUpdate);
+    return () => {
+      window.removeEventListener("keydown", eventListener)
+      window.removeEventListener("storage", onStorageUpdate);
+    };
+  },[])
+ 
+  
   const value = {
     state,
     setQuestion,
+    setAnnouncer,
     setAnswer,
     setCode,
+    reset,
     setOrderId,
     checkAnswer,
     setSelected,
+    setTeam,
+    toggleSidebar,
     dispatch
   }
   return (
