@@ -5,10 +5,10 @@ import { PodiumIcon, QuestionIcon, ScoreIcon, TeamIcon } from "@/components"
 import { cn } from "@/utils";
 
 const Sidebar = () => {
-  const { showSidebar } = useAppContext();
+  const { state } = useAppContext();
   const size = 24;
   return (
-    <nav className={`sidebar ${!showSidebar ? "collapsed" : ""}`}>
+    <nav className={`sidebar ${!state.showSidebar ? "collapsed" : ""}`}>
       <div className="sidebar-content">
         <div className={cn("text-blue-50 flex flex-col justify-center align-center items-center pt-0 mb-0")}>
           <img src={LOGO} alt="logo" className="w-20"/>

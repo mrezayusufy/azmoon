@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { TIMER } from '@/constants';
-import { useQuestionStore } from '@/store';
+import { useAppContext } from '@/contexts';
 
 type Props = {
   timer: number;
@@ -13,8 +13,7 @@ export const Timer: React.FC<Props> = ({ timer }) => {
   const imgRef = useRef<HTMLImageElement | null>(null);
   const textRef = useRef<HTMLDivElement | null>(null);
   const tl = useRef<GSAPTimeline | null>(null);
-  const checkAnswer = useQuestionStore(_ => _.checkAnswer);
-
+  const {checkAnswer}= useAppContext()
   useEffect(() => {
     tl.current = gsap.timeline({ paused: true });
 
@@ -27,7 +26,7 @@ export const Timer: React.FC<Props> = ({ timer }) => {
             gsap.to(textRef.current, { opacity: 1, duration: 0.5 });
             startCountdown();
           } else if (index !== TIMER.length - 1 && textRef.current) {
-            gsap.to(textRef.current, { opacity: 0, duration: 0.05 });
+            gsap.to(textRef.current, { opacity: 0, duration: 0.5 });
           }
         },
       });
@@ -80,13 +79,11 @@ export const Timer: React.FC<Props> = ({ timer }) => {
 
   const playAnimation = () => {
     tl.current?.play();
-    textRef.current && gsap.to(textRef.current, { opacity: 1, duration: 0.5 });
   };
 
   const reverseAnimation = () => {
     tl.current?.reverse();
-    checkAnswer(); 
-    textRef.current && gsap.to(textRef.current, { opacity: 0, duration: 0.5 });
+    checkAnswer(1)
     setTimeout(() => {
       setCountdown(timer);
     }, 5000);
@@ -94,7 +91,7 @@ export const Timer: React.FC<Props> = ({ timer }) => {
 
   return (
     <div className='timer'>
-      <div ref={textRef} className='timer'>
+      <div ref={textRef} >
         {countdown > 0 ? `${new Intl.NumberFormat('fa-IR').format(countdown)}` : ''}
       </div>
       <img ref={imgRef} src={TIMER[0]} alt="frame" className='object-contain' />

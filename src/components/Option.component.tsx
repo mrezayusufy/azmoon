@@ -1,17 +1,15 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
-import { OPTION } from '../constants';
-import { useQuestionStore } from '../store';
-import { cn, contextMenu, preventDefault } from '../utils';
+import { OPTION } from '@/constants';
+import { cn } from '@/utils';
 import { Title } from './Title.component';
+import { useAppContext } from '@/contexts';
 type OptionProp = {
   content: string;
   color: string; 
 }
 export const Option: React.FC<OptionProp> = ({ content, color }: OptionProp) => {
-  const {setSelectedAnswer, setAnswerChecked} = useQuestionStore((_: any) => ({
-    setSelectedAnswer: _.setSelectedAnswer, 
-    setAnswerChecked: _.setAnswerChecked}));
+  const {setAnswer, checkAnswer} = useAppContext();
   const imgRef = useRef<HTMLImageElement | null>(null);
   const textRef = useRef<HTMLDivElement | null>(null);
   const tl = useRef<GSAPTimeline | null>(null);
@@ -53,15 +51,12 @@ export const Option: React.FC<OptionProp> = ({ content, color }: OptionProp) => 
 
   }, []);
   const onChoose = () => {
-    setSelectedAnswer(content);
+    setAnswer(content);
   }
   const reverseAnimation = () => {
-    setTimeout(() => {
-      setAnswerChecked(false);
-      setSelectedAnswer("")}, 5000)
     tl.current?.reverse();
-     (textRef.current) &&
-      gsap.set(textRef.current, { opacity: 0 }); // Hide the text when animation restarts
+    checkAnswer(0);
+    // setAnswer("")
   }
   const playAnimation = () => {
     tl.current?.play();

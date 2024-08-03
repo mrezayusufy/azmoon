@@ -7,6 +7,7 @@ type Props = {
 }
 export const QuestionItem: React.FC<Props> = ({content}) => {
   const imgRef = useRef<HTMLImageElement | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
   const textRef = useRef<HTMLDivElement | null>(null);
   const tl = useRef<GSAPTimeline | null>(null);
   useEffect(() => {
@@ -26,7 +27,7 @@ export const QuestionItem: React.FC<Props> = ({content}) => {
         },
       });
     });
-
+    if(tl.current.paused()) setIsPlaying(true);
     return () => {
       (tl.current) && tl.current.kill();
     };
@@ -48,17 +49,15 @@ export const QuestionItem: React.FC<Props> = ({content}) => {
 
   const playAnimation = () => {
     tl.current?.play();
-    (textRef.current) && gsap.set(textRef.current, { opacity: 1 }); 
   };
 
   const reverseAnimation = () => {
     tl.current?.reverse();
-    (textRef.current) && gsap.set(textRef.current, { opacity: 0 }); 
   };
 
   return (
     <section className='question'>
-      <div ref={textRef}>
+      <div ref={textRef} className='opacity-0'>
         <Title text={content} maxLength={18}/>
       </div>
       <img ref={imgRef} src={ONE_QUESTION_FRAMES[0]} alt="frame"/>

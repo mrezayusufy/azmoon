@@ -8,7 +8,7 @@ export const HostIntroPage = () => {
       announcer= useFormStore.getState().announcer;
     }, [announcer]);
   return (
-    <div className="flex flex-col items-end h-dvh justify-end px-10">
+    <div className="flex flex-col items-end h-full justify-end px-10">
       <HostIntro title={announcer} subtitle="گوینده" />
     </div>
   );

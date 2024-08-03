@@ -1,10 +1,10 @@
-import { useQuestionStore } from "@/store";
-import { useEffect } from "react";
+import { useAppContext } from "@/contexts";
+import { useFormStore, useQuestionStore } from "@/store";
 import { useForm } from "react-hook-form";
-import "react-toastify/dist/ReactToastify.css";
 import { toast } from "sonner"
 export const Welcome = () => {
-  const { setOrderId, setSelectedAnswer } = useQuestionStore((_: any) => ({ setOrderId: _.setOrderId, setSelectedAnswer: _.setSelectedAnswer }));
+  const { state, setOrderId, setAnswer } = useAppContext();
+  const setAnnouncer = useFormStore(_ => _.setAnnouncer);
   const {
     register: registerOrderId,
     handleSubmit: handleSubmitOrderId,
@@ -12,7 +12,7 @@ export const Welcome = () => {
     formState: { errors: errorsOrderId, isSubmitting: isSubmittingOrderId },
   } = useForm({
     defaultValues: {
-      orderId: useQuestionStore.getState().orderId,
+      orderId: state.orderId,
     },
   });
 
@@ -20,41 +20,37 @@ export const Welcome = () => {
     register: registerAnswer,
     handleSubmit: handleSubmitAnswer,
     formState: { errors: errorsAnswer },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      answer: state.answer,
+    },
+  });
+
+  const {
+    register: registerAnnouncer,
+    handleSubmit: handleSubmitAnnouncer,
+    formState: { errors: errorsAnnouncer },
+  } = useForm({
+    defaultValues: {
+      announcer: useFormStore.getState().announcer,
+    },
+  });
 
   const onSubmitOrderId = (data: any) => {
     setOrderId(data.orderId)
-    toast.success("نوبت سوال با موفقیت ثبت شد", {
-      position: "top-center",
-      autoClose: 5000,
-    });
+    toast("نوبت سوال با موفقیت ثبت شد");
   };
 
   const onSubmitAnswer = (data: any) => {
-    setSelectedAnswer(data.answer)
-    toast.success("جواب بازی با موفقیت ثبت شد", {
-      position: "top-center",
-      autoClose: 5000,
-    });
+    setAnswer(data.answer)
+    toast("جواب بازی با موفقیت ثبت شد");
   };
 
-  const onSubmitAnnouncer: SubmitHandler<AnnouncerFormData> = (data) => {
+  const onSubmitAnnouncer = (data: any) => {
     setAnnouncer(data.announcer);
-    toast.success("نام گوینده بازی با موفقیت ثبت شد", {
-      position: "top-center",
-      autoClose: 5000,
-    });
-  };
-
-  // Sync form values with zustand store
-  useEffect(() => {
-    setValueOrderId("orderId", useFormStore.getState().orderId);
-    setValueTypedAnswer("typedAnswer", useFormStore.getState().typedAnswer);
-    setValueAnnouncer("announcer", useFormStore.getState().announcer);
-  }, [setValueOrderId, setValueTypedAnswer, setValueAnnouncer]);
-
-  return (
-    <div className="container mt-5">
+    toast("نام گوینده بازی با موفقیت ثبت شد");
+  }; 
+  return <div className="container mt-5">
       <div className="row justify-content-center">
         <div className="col-md-6">
           <div className="row">
@@ -93,7 +89,7 @@ export const Welcome = () => {
                     <div className="mb-3">
                       <label className="form-label">جواب سوال</label>
                       <input
-                        className={`form-control ${errorsAnswer.Answer
+                        className={`form-control ${errorsAnswer.answer
                             ? "is-invalid"
                             : ""
                           }`}
@@ -102,9 +98,41 @@ export const Welcome = () => {
                           required: true,
                         })}
                       />
-                      {errorsAnswer.Answer && (
+                      {errorsAnswer.answer && (
                         <div className="invalid-feedback">
                           جواب سوال مورد نیاز است
+                        </div>
+                      )}
+                    </div>
+                    <div className="text-center mt-3">
+                      <button type="submit" className="btn btn-primary">
+                        ثبت کنید
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            {/* announcer */}
+            <div className="col-md-6 mt-4 mt-md-0">
+              <div className="card">
+                <div className="card-body">
+                  <form onSubmit={handleSubmitAnnouncer(onSubmitAnnouncer)}>
+                    <div className="mb-3">
+                      <label className="form-label">نام گوینده</label>
+                      <input
+                        className={`form-control ${errorsAnnouncer.announcer
+                            ? "is-invalid"
+                            : ""
+                          }`}
+                        type="text"
+                        {...registerAnnouncer("announcer", {
+                          required: true,
+                        })}
+                      />
+                      {errorsAnnouncer.announcer && (
+                        <div className="invalid-feedback">
+                          نام گوینده را وارد کنید
                         </div>
                       )}
                     </div>

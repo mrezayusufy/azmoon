@@ -19,7 +19,7 @@ export const useQuestionStore = create<IQuestionState & IQuestionActions>()(
       setOrderId: (orderId: number) => set({ orderId }),
       incrementOrderId: () => set(state => {
         return {
-          orderId: state.orderId + 1,
+          orderId: +state.orderId + 1,
         }
       }), 
       setQuestion: (question: IQuestion) => set({ question }),

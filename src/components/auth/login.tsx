@@ -3,7 +3,8 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { LogoAnimation } from '@/components';
 import { useNavigate, useRouteError } from 'react-router-dom';
 import { getTeam } from '@/services';
-import { useQuestionStore, useTeamStore } from '@/store';
+import { useTeamStore } from '@/store';
+import { useAppContext } from '@/contexts';
 
 type FormData = {
   code: string;
@@ -12,11 +13,11 @@ type FormData = {
 export const Login: React.FC = () => {
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>();
   const navigate = useNavigate();
+  const {setCode} = useAppContext();
   const routeErrors = useRouteError() as any;
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     try {
       const response = await getTeam(data.code);
-      const setCode = useQuestionStore.getState().setCode;
       setCode(data.code);
       const setTeams = useTeamStore.getState().setTeams;
       setTeams(response.data)

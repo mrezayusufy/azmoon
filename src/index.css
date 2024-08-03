@@ -3,7 +3,7 @@
 @tailwind utilities;
 body {
   background-color: transparent !important;
-  height: 100dvh;
+  height: 100%;
 }
 * {
   user-select: none;
@@ -13,12 +13,11 @@ body {
  flex-flow: column;
  justify-content: center;
  align-items: center;
- & img {
-  width: 250px;
-  height: auto !important; 
-  aspect-ratio: 1/1 !important;
-  filter: drop-shadow(0 0 12px #02020242);
- }
+}
+.login > img {
+ width: 250px;
+ height: auto !important; 
+ filter: drop-shadow(0 0 12px #02020242);
 }
 .sidebar-link {
   display: flex !important;
@@ -30,10 +29,10 @@ body {
   @apply absolute inset-0 mix-blend-hue pr-0.5 pt-0.5;
 }
 .timer {
-  @apply relative;
-  & div {
-    @apply pt-3 opacity-0 transition-all duration-300 absolute text-4xl bottom-[85px] text-white right-[165px] size-14 grid place-content-center ;
-  }
+  position: relative;
+}
+.timer > div {
+  @apply pt-3 opacity-0 transition-all duration-300 absolute text-4xl bottom-[85px] text-white right-[165px] size-14 grid place-content-center ;
 }
 .falsy {
   filter: hue-rotate(150deg)
@@ -46,18 +45,18 @@ body {
 }
 .option {
   @apply w-[160px] flex relative;
-  & p {
-    @apply text-lg opacity-0 transition-opacity duration-100 absolute inset-0 pb-2 text-white w-full z-10 grid place-content-center;
-  }
+}
+.option > p {
+  @apply text-lg opacity-0 transition-opacity duration-100 absolute inset-0 pb-2 text-white w-full z-10 grid place-content-center;
 }
 .question {
   @apply relative;
-  & div {
-    @apply grid px-6 pt-2 place-content-center inset-0 transition-opacity duration-100 absolute text-wrap text-white w-full;
-  }
-  & img {
-    @apply object-contain;
-  }
+}
+.question > div {
+  @apply grid px-6 pt-2 place-content-center inset-0 transition-opacity duration-100 absolute text-wrap text-white w-full;
+}
+.question > img {
+  @apply object-contain;
 }
 .checked {
   font-variant-emoji: ;

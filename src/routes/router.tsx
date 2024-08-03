@@ -3,8 +3,7 @@ import { Login } from "@/components";
 import {Scores, Team, NotFound, Welcome, QuestionPage} from "@/pages";
 import { MainLayout, IdentityLayout} from "@/layouts"
 const authLoader = async () => {
-  const gameStorage = JSON.parse(localStorage.getItem("game-storage") as string)
-  const code = gameStorage.state.code;
+  const code = localStorage.getItem("code")
   if (!code) {
     throw redirect("/login");
   }

@@ -3,9 +3,7 @@ import Sidebar from "./sidebar";
 import TopNav from "./top-nav";
 
 export const MainLayout = () => {
-  
-  return (
-    <div className="wrapper" style={{ minHeight: "100vh" }}>
+  return <div className="wrapper bg-blue-50" style={{ minHeight: "100vh" }}>
       <Sidebar />
       <div className="main">
         <TopNav />
@@ -27,6 +25,5 @@ export const MainLayout = () => {
         </footer>
       </div>
     </div>
-  );
 };
  
