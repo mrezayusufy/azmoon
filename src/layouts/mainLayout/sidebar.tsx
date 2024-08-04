@@ -1,7 +1,7 @@
 import { useAppContext } from "@/contexts";
 import { NavLink } from "react-router-dom";
 import { LOGO } from "@/constants"
-import { PodiumIcon, QuestionIcon, ScoreIcon, TeamIcon } from "@/components"
+import { HomeIcon, PodiumIcon, QuestionIcon, ScoreIcon, TeamIcon } from "@/components"
 import { cn } from "@/utils";
 import { AnnouncerIcon } from "@/components/icons/Announcer.icon";
 
@@ -79,6 +79,18 @@ const Sidebar = () => {
             >
               <AnnouncerIcon width={size} height={size}/>
               <span className="align-middle me-2">گوینده برنامه</span>
+            </NavLink>
+          </li>
+          <li className="sidebar-item">
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "sidebar-link active" : "sidebar-link"
+              }
+              to={"/starter"}
+              rel="noopener noreferrer"
+            >
+              <HomeIcon width={size} height={size}/>
+              <span className="align-middle me-2">شروع بازی</span>
             </NavLink>
           </li>
         </ul>
