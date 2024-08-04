@@ -74,8 +74,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
  
   // keyboard event handler for increment and nav to home page
   const eventListener = (event: KeyboardEvent) => {
-    event.preventDefault();
-    if (event.ctrlKey && (event.key === "]" || event.key === "چ")) incrementOrderId();
+    console.log(window.location.href);
+    if (event.ctrlKey && (event.key === SHORTCUTS.orderId.key || event.key === SHORTCUTS.orderId.persianKey)) incrementOrderId();
     if (event.ctrlKey && (event.key === SHORTCUTS.home.key || event.key === SHORTCUTS.home.persianKey)) document.location.replace("/")
   }
 

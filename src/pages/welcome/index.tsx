@@ -98,9 +98,8 @@ export const Welcome = () => {
               <li key={shortcutKey}>
                 <strong>{item.title}:</strong>{' '}
                 {item.ctrl && <><kbd>ctrl</kbd><span>+</span></>}
-                
+                {item.shift && <><kbd>shift</kbd><span>+</span></>}
                 <kbd>{key}</kbd>
-               
               </li>
             )
           })}
