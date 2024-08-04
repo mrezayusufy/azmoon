@@ -75,11 +75,10 @@ export const Timer: React.FC<Props> = ({ timer }) => {
 
   const reverseAnimation = useCallback(() => {
     tl.current?.reverse();
-    checkAnswer(true);
     setTimeout(() => {
       setCountdown(timer);
     }, 5000);
-  }, [timer, checkAnswer]);
+  }, [timer]);
   
 useEffect(() => {
   if (countdown === 0) {
