@@ -6,3 +6,4 @@ export { NotFound } from "./not-found";
 export { UnhandledException } from "./unhandle-exception";
 export { Welcome } from "./welcome";
 export { Team } from "./team";
+export { WinnerPage } from "./winner";

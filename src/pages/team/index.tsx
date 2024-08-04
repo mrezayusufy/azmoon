@@ -13,7 +13,7 @@ export const Team = () => {
   })
   if(isError && !data) return null;
   if(isLoading) return null;
-  return <section className="flex flex-col justify-end h-full p-3">
+  return <section className="flex flex-col justify-end h-full p-5">
     <ul className="flex flex-col gap-0">
       {data.data.map((item: ITeam) =>
         <li key={item.teamId} className="-mt-3">

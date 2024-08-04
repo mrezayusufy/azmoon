@@ -61,11 +61,11 @@ const Sidebar = () => {
               className={({ isActive }) =>
                 isActive ? "sidebar-link active" : "sidebar-link"
               }
-              to={"/score"}
+              to={"/winner"}
               rel="noopener noreferrer"
             >
               <ScoreIcon width={size} height={size}/>
-              <span className="align-middle me-2">نمایش نمرات تیم ها</span>
+              <span className="align-middle me-2">برنده بازی</span>
             </NavLink>
           </li>
         </ul>

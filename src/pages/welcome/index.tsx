@@ -2,7 +2,17 @@ import { useAppContext } from "@/contexts";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner"
 export const Welcome = () => {
-  const { state, setOrderId, setAnswer, setAnnouncer } = useAppContext();
+  const { state, setOrderId, setAnswer, setAnnouncer, setWinner } = useAppContext();
+  //----- winner -----
+  const {
+    register: registerWinner,
+    handleSubmit: handleSubmitWinner,
+    formState: { errors: errorsWinner, isSubmitting: isSubmittingWinner },
+  } = useForm({
+    defaultValues: {
+      winner: state.winner,
+    },
+  });
   const {
     register: registerOrderId,
     handleSubmit: handleSubmitOrderId,
@@ -37,6 +47,10 @@ export const Welcome = () => {
     setOrderId(data.orderId)
     toast("نوبت سوال با موفقیت ثبت شد");
   };
+  const onSubmitWinner = (data: any) => {
+    setWinner(data.winner)
+    toast("برنده بازی با موفقیت ثبت شد");
+  };
 
   const onSubmitAnswer = (data: any) => {
     setAnswer(data.answer)
@@ -51,6 +65,7 @@ export const Welcome = () => {
       <div className="row justify-content-center">
         <div className="col-md-6">
           <div className="row">
+            {/* orderId */}
             <div className="col-md-6">
               <div className="card">
                 <div className="card-body">
@@ -78,7 +93,7 @@ export const Welcome = () => {
                 </div>
               </div>
             </div>
-
+            {/* answer */}
             <div className="col-md-6 mt-4 mt-md-0">
               <div className="card">
                 <div className="card-body">
@@ -130,6 +145,38 @@ export const Welcome = () => {
                       {errorsAnnouncer.announcer && (
                         <div className="invalid-feedback">
                           نام گوینده را وارد کنید
+                        </div>
+                      )}
+                    </div>
+                    <div className="text-center mt-3">
+                      <button type="submit" className="btn btn-primary">
+                        ثبت کنید
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            {/* winner */}
+            <div className="col-md-6 mt-4 mt-md-0">
+              <div className="card">
+                <div className="card-body">
+                  <form onSubmit={handleSubmitWinner(onSubmitWinner)}>
+                    <div className="mb-3">
+                      <label className="form-label">نام برنده بازی</label>
+                      <input
+                        className={`form-control ${errorsWinner.winner
+                            ? "is-invalid"
+                            : ""
+                          }`}
+                        type="text"
+                        {...registerWinner("winner", {
+                          required: true,
+                        })}
+                      />
+                      {errorsWinner.winner && (
+                        <div className="invalid-feedback">
+                          نام برنده بازی را وارد کنید
                         </div>
                       )}
                     </div>

@@ -1,6 +1,6 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
 import { Login } from "@/components";
-import {Scores, Team, NotFound, Welcome, QuestionPage} from "@/pages";
+import { Team, NotFound, Welcome, QuestionPage, WinnerPage} from "@/pages";
 import { MainLayout, IdentityLayout} from "@/layouts"
 const authLoader = async () => {
   const code = localStorage.getItem("code")
@@ -33,8 +33,8 @@ const router = createBrowserRouter([
     loader: authLoader,
   },
   {
-    path: "score",
-    element: <Scores />,
+    path: "winner",
+    element: <WinnerPage />,
     loader: authLoader,
   },
   {
