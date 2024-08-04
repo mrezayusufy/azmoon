@@ -51,7 +51,7 @@ export const WinnerComponent: React.FC<Props> = ({ content }) => {
     tl.current?.play();
   }
   return <section className="flex flex-col justify-end h-full">
-    <div ref={textRef} className='absolute text-lg z-10 text-black bottom-20 mb-1 w-full grid place-content-center '>
+    <div ref={textRef} className='winner'>
       {content}
     </div>
     <img ref={imgRef} src={WINNER_FRAMES[0]} alt="winner frame" className="object-contain z-0" />

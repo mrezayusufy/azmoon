@@ -65,5 +65,11 @@ kbd {
 .checked {
   font-variant-emoji: ;
 }
+.winner {
+  @apply absolute opacity-0 text-lg z-10 text-black bottom-20 mb-1 w-full grid place-content-center ;
+  bottom: 18%;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
 
 
