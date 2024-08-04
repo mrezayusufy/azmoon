@@ -1,10 +1,8 @@
 import React, { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { OPTION } from '@/constants';
-import { cn } from '@/utils';
-import { Title } from './Title.component';
-import { useAppContext } from '@/contexts';
-import { OptionShape } from './icons/Option.shape';
+import { cn } from '@/utils'; 
+import { useAppContext } from '@/contexts'; 
 type OptionProp = {
   content: string;
   color: string; 
@@ -68,8 +66,6 @@ export const Option: React.FC<OptionProp> = ({ content, color }: OptionProp) => 
       <p ref={textRef} className='z-20'>
         {content}    
       </p>
-      <OptionShape width={351} height={70} 
-          className={cn('absolute inset-0 w-[160px] mt-0.5 fill-transparent h-auto z-10', color)}/>
       <img ref={imgRef} src={OPTION[0]}  alt="frame" className={cn('object-contain', color)} />
     </div>
   );

@@ -8,6 +8,10 @@ body {
 * {
   user-select: none;
 }
+kbd {
+  direction: ltr !important;
+  border-radius: 5px;
+}
 .login {
  display: flex;
  flex-flow: column;

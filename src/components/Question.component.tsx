@@ -5,8 +5,7 @@ import { QuestionItem } from "./QuestionItem.component";
 import { Timer } from "./Timer.component";
 import { cn } from "@/utils";
 import { OptionItem } from "./OptionItem.component";
-import { useAppContext } from "@/contexts";
-import FramePlayer from "./Countdown/Countdown.component";
+import { useAppContext } from "@/contexts"; 
 interface Props {
   question: IQuestion;
 }
@@ -46,31 +45,17 @@ export const Question: React.FC<Props> = ({ question }) => {
           opt.map((item) => {
             let color = "";
             const isChecked = Boolean(state.isChecked)
-            let content = "";
             if (isChecked) {
-              if (item === question?.correctAnswer) { 
-                color = "truthy";
-                content = item + " ✅"
-              }
-              else if (item === state.answer) {
-                color = "falsy";
-                content = item;
-              }
-            } else if (item === state.answer) {
-              color = "selected"
-              content = item + " 🔲"
-            };
+              if(item === question?.correctAnswer) color = "truthy" 
+              else if (item === state.answer) color = "falsy";
+            } else if(item === state.answer) color = "selected";
             return (
               <div
                 key={item}
-                className={cn(
-                  state.answer === item && "drop-shadow-xl scale-110 ",
-                  "transition-all duration-300",
-                  state.answer === item && (state.question?.correctAnswer !== state.answer ? "opacity-50" : "")
-                )}
+                className={cn("transition-all duration-300")}
               >
                 <Option
-                  color={item === OPTION_ENUM.TRUE ? "truthy" : "falsy"}
+                  color={color}
                   content={item}
                 />
               </div>

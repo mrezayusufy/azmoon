@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useMemo } from 'react';
+import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import { gsap } from 'gsap';
 import { TIMER } from '@/constants';
 import { useAppContext } from '@/contexts';
@@ -46,7 +46,7 @@ export const Timer: React.FC<Props> = ({ timer }) => {
     };
   }, []);
  
-  const startCountdown = () => {
+  const startCountdown = useCallback(() => {
     if (countdownRef.current) {
       clearInterval(countdownRef.current);
     }
@@ -60,25 +60,27 @@ export const Timer: React.FC<Props> = ({ timer }) => {
         return prevCountdown - 1;
       });
     }, 1000);
-  };
+  }, []);
 
-  const stopCountdown = () => {
+  const stopCountdown = useCallback(() => {
     if (countdownRef.current) {
       clearInterval(countdownRef.current);
       countdownRef.current = null;
     }
-  };
+  }, []);
 
-  const playAnimation = () => {
+  const playAnimation = useCallback(() => {
     tl.current?.play();
-  };
+  }, []);
 
-  const reverseAnimation = () => {
+  const reverseAnimation = useCallback(() => {
     tl.current?.reverse();
+    checkAnswer(true);
     setTimeout(() => {
       setCountdown(timer);
     }, 5000);
-  };
+  }, [timer, checkAnswer]);
+  
 useEffect(() => {
   if (countdown === 0) {
     checkAnswer(true);

@@ -1,3 +1,4 @@
+import { SHORTCUTS } from "@/constants";
 import { useAppContext } from "@/contexts";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner"
@@ -63,6 +64,24 @@ export const Welcome = () => {
   }; 
   return <div className="container mt-5">
       <div className="row justify-content-center">
+      <details className="bg-white py-3 px-3 rounded-md mb-3 flex flex-col gap-y-3">
+        <summary>شارتکت ها</summary>
+        <ol >
+          {Object.keys(SHORTCUTS).map((shortcutKey: any) => {
+            const item = SHORTCUTS[shortcutKey];
+            const key = item.key;
+            return (
+              <li key={shortcutKey}>
+                <strong>{item.title}:</strong>{' '}
+                {item.ctrl && <><kbd>ctrl</kbd><span>+</span></>}
+                
+                <kbd>{key}</kbd>
+               
+              </li>
+            )
+          })}
+        </ol>
+      </details>
         <div className="col-md-6">
           <div className="row">
             {/* orderId */}

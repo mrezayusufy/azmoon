@@ -2,6 +2,7 @@ import React, { createContext, useReducer, ReactNode, useContext, useEffect } fr
 import { ContextProps } from '@/types';
 import { initialState, reducer } from './app-reducer';
 import { IQuestion, ITeam } from '@/interfaces';
+import { SHORTCUTS } from '@/constants';
 
 const AppContext = createContext<ContextProps | undefined>(undefined);
 
@@ -64,10 +65,12 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       setSelected(newValue);
     }
   };
+ 
   // keyboard event handler for increment and nav to home page
   const eventListener = (event: KeyboardEvent) => {
-    if (event.ctrlKey && (event.key === "i" || event.key === "ه")) incrementOrderId();
-    if (event.ctrlKey && (event.key === "y" || event.key === "غ")) document.location.replace("/")
+    event.preventDefault();
+    if (event.ctrlKey && (event.key === "]" || event.key === "چ")) incrementOrderId();
+    if (event.ctrlKey && (event.key === SHORTCUTS.home.key || event.key === SHORTCUTS.home.persianKey)) document.location.replace("/")
   }
 
   useEffect(() => {

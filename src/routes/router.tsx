@@ -1,6 +1,6 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
 import { Login } from "@/components";
-import { Team, NotFound, Welcome, QuestionPage, WinnerPage} from "@/pages";
+import { Team, NotFound, Welcome, QuestionPage, WinnerPage, HostIntroPage} from "@/pages";
 import { MainLayout, IdentityLayout} from "@/layouts"
 const authLoader = async () => {
   const code = localStorage.getItem("code")
@@ -25,6 +25,11 @@ const router = createBrowserRouter([
   {
     path: "question",
     element: <QuestionPage />,
+    loader: authLoader,
+  },
+  {
+    path: "host-introduction",
+    element: <HostIntroPage />,
     loader: authLoader,
   },
   {
