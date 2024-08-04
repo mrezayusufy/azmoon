@@ -11,6 +11,7 @@ export const initialState: State = {
   announcer: localStorage.getItem("announcer") || '',
   selected: localStorage.getItem("selected") || '',
   question: JSON.parse(localStorage.getItem("question") as string) || null,
+  starter: JSON.parse(localStorage.getItem("starter") as string) || {IsAnnouncer: false, IsScore: false, IsQuestion: false, IsWinner: false},
 };
 
 export const reducer = (state: State, action: Action): State => {
@@ -30,6 +31,12 @@ export const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         question: action.payload,
+      };
+    case "SET_STARTER": 
+      localStorage.setItem('starter', JSON.stringify(action.payload));
+      return {
+        ...state,
+        starter: action.payload,
       };
     case "SET_TEAM":
       return {

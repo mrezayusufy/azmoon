@@ -1,9 +1,12 @@
+import { FormComponent } from "@/components";
 import { SHORTCUTS } from "@/constants";
 import { useAppContext } from "@/contexts";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner"
 export const Welcome = () => {
-  const { state, setOrderId, setAnswer, setAnnouncer, setWinner } = useAppContext();
+  const { state, setOrderId, setAnswer, setAnnouncer, setWinner, setStarter } = useAppContext();
+  // starter
+  const {IsAnnouncer,IsQuestion,IsScore,IsWinner} = state.starter
   //----- winner -----
   const {
     register: registerWinner,
@@ -62,7 +65,28 @@ export const Welcome = () => {
     setAnnouncer(data.announcer);
     toast("نام گوینده بازی با موفقیت ثبت شد");
   }; 
-  return <div className="container mt-5">
+
+  const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    const boolValue = Boolean(value);
+    const starter = {
+      IsAnnouncer: false,
+      IsWinner: false,
+      IsScore: false,
+      IsQuestion: false,
+    }
+    // به روز رسانی وضعیت‌ها
+    if (name === "IsAnnouncer") {
+      setStarter({...starter, IsAnnouncer: boolValue})
+    } else if (name === "IsQuestion") {
+      setStarter({...starter, IsQuestion: boolValue})
+    } else if (name === "IsScore") {
+      setStarter({...starter, IsScore: boolValue})
+    } else if (name === "IsWinner") {
+      setStarter({...starter, IsWinner: boolValue})
+    }
+  };
+  return <div className="container">
       <div className="row justify-content-center">
       <details className="bg-white py-3 px-3 rounded-md mb-3 flex flex-col gap-y-3">
         <summary>شارتکت ها</summary>
@@ -82,134 +106,98 @@ export const Welcome = () => {
           })}
         </ol>
       </details>
-        <div className="col-md-6">
-          <div className="row">
+          <div className="row justify-center">
             {/* orderId */}
-            <div className="col-md-6">
-              <div className="card">
-                <div className="card-body">
-                  <form onSubmit={handleSubmitOrderId(onSubmitOrderId)}>
-                    <div className="mb-3">
-                      <label className="form-label">نوبت سوال</label>
-                      <input className={`form-control ${errorsOrderId.orderId ? "is-invalid" : ""}`}
-                        type="text"
-                        {...registerOrderId("orderId", {
-                          required: true,
-                        })}
-                      />
-                      {errorsOrderId.orderId && (
-                        <div className="invalid-feedback">
-                          نوبت سوال مورد نیاز است
-                        </div>
-                      )}
-                    </div>
-                    <div className="text-center mt-3">
-                      <button type="submit" className="btn btn-primary">
-                        ثبت کنید
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
+            <FormComponent
+              onSubmit={handleSubmitOrderId(onSubmitOrderId)}
+              register={registerOrderId("orderId", { required: true })}
+              errors={errorsOrderId.orderId}
+              defaultValue={state.orderId}
+              label="نوبت سوال"
+              buttonText="ثبت کنید"
+            /> 
             {/* answer */}
-            <div className="col-md-6 mt-4 mt-md-0">
-              <div className="card">
-                <div className="card-body">
-                  <form onSubmit={handleSubmitAnswer(onSubmitAnswer)}>
-                    <div className="mb-3">
-                      <label className="form-label">جواب سوال</label>
-                      <input
-                        className={`form-control ${errorsAnswer.answer
-                            ? "is-invalid"
-                            : ""
-                          }`}
-                        type="text"
-                        {...registerAnswer("answer", {
-                          required: true,
-                        })}
-                      />
-                      {errorsAnswer.answer && (
-                        <div className="invalid-feedback">
-                          جواب سوال مورد نیاز است
-                        </div>
-                      )}
-                    </div>
-                    <div className="text-center mt-3">
-                      <button type="submit" className="btn btn-primary">
-                        ثبت کنید
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
+            <FormComponent
+              onSubmit={handleSubmitAnswer(onSubmitAnswer)}
+              register={registerAnswer("answer", { required: true })}
+              errors={errorsAnswer.answer}
+              defaultValue={state.answer}
+              label="جواب سوال"
+              buttonText="ثبت کنید"
+            /> 
             {/* announcer */}
-            <div className="col-md-6 mt-4 mt-md-0">
-              <div className="card">
-                <div className="card-body">
-                  <form onSubmit={handleSubmitAnnouncer(onSubmitAnnouncer)}>
-                    <div className="mb-3">
-                      <label className="form-label">نام گوینده</label>
-                      <input
-                        className={`form-control ${errorsAnnouncer.announcer
-                            ? "is-invalid"
-                            : ""
-                          }`}
-                        type="text"
-                        {...registerAnnouncer("announcer", {
-                          required: true,
-                        })}
-                      />
-                      {errorsAnnouncer.announcer && (
-                        <div className="invalid-feedback">
-                          نام گوینده را وارد کنید
-                        </div>
-                      )}
-                    </div>
-                    <div className="text-center mt-3">
-                      <button type="submit" className="btn btn-primary">
-                        ثبت کنید
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
+            <FormComponent
+              onSubmit={handleSubmitAnnouncer(onSubmitAnnouncer)}
+              register={registerAnnouncer("announcer", { required: true })}
+              errors={errorsAnnouncer.announcer}
+              defaultValue={state.announcer}
+              label="نام گوینده"
+              buttonText="ثبت کنید"
+            />
             {/* winner */}
-            <div className="col-md-6 mt-4 mt-md-0">
+            <FormComponent
+              onSubmit={handleSubmitWinner(onSubmitWinner)}
+              register={registerWinner("winner", { required: true })}
+              errors={errorsWinner.winner}
+              defaultValue={state.winner}
+              label="نام برنده بازی"
+              buttonText="ثبت کنید"
+            /> 
+            
+          </div>
+          <div className="row mt-4">
+        {["IsAnnouncer", "IsScore", "IsWinner", "IsQuestion"].map(
+          (item, index) => (
+            <div className="col-md-3" key={index}>
               <div className="card">
                 <div className="card-body">
-                  <form onSubmit={handleSubmitWinner(onSubmitWinner)}>
-                    <div className="mb-3">
-                      <label className="form-label">نام برنده بازی</label>
-                      <input
-                        className={`form-control ${errorsWinner.winner
-                            ? "is-invalid"
-                            : ""
-                          }`}
-                        type="text"
-                        {...registerWinner("winner", {
-                          required: true,
-                        })}
-                      />
-                      {errorsWinner.winner && (
-                        <div className="invalid-feedback">
-                          نام برنده بازی را وارد کنید
-                        </div>
-                      )}
-                    </div>
-                    <div className="text-center mt-3">
-                      <button type="submit" className="btn btn-primary">
-                        ثبت کنید
-                      </button>
-                    </div>
-                  </form>
+                  <label className="form-label">
+                    نمایش {item.replace("Is", "")}
+                  </label>
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name={item}
+                      value="true"
+                      checked={
+                        item === "IsAnnouncer"
+                          ? IsAnnouncer
+                          : item === "IsQuestion"
+                          ? IsQuestion
+                          : item === "IsScore"
+                          ? IsScore
+                          : IsWinner
+                      }
+                      onChange={handleRadioChange}
+                    />
+                    <label className="form-check-label">فعال</label>
+                  </div>
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name={item}
+                      value="false"
+                      checked={
+                        item === "IsAnnouncer"
+                          ? !IsAnnouncer
+                          : item === "IsQuestion"
+                          ? !IsQuestion
+                          : item === "IsScore"
+                          ? !IsScore
+                          : !IsWinner
+                      }
+                      onChange={handleRadioChange}
+                    />
+                    <label className="form-check-label">غیر فعال</label>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          )
+        )}
+      </div>
       </div>
     </div>
 };

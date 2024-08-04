@@ -1,5 +1,10 @@
 import { IQuestion, ITeam } from "@/interfaces";
-
+export type starterType = {
+  IsAnnouncer?: boolean,
+  IsQuestion?: boolean,
+  IsScore?: boolean,
+  IsWinner?: boolean,
+}
 export type State = {
   orderId: number;
   code: string;
@@ -11,12 +16,14 @@ export type State = {
   selected: string;
   team: ITeam | null;
   showSidebar: boolean;
+  starter: starterType;
 };
 
 export type Action =
   | { type: 'SET_ORDER_ID'; payload: number }
   | { type: 'INCREMENT_ORDER_ID' }
   | { type: 'SET_CODE'; payload: string }
+  | { type: 'SET_STARTER'; payload: starterType }
   | { type: 'SET_SELECTED'; payload: string }
   | { type: 'SET_ANNOUNCER'; payload: string }
   | { type: 'SET_TEAM'; payload: ITeam }
@@ -41,4 +48,5 @@ export type ContextProps = {
   toggleSidebar: () => void,
   setAnnouncer: (value: string) => void,
   setWinner: (value: string) => void,
+  setStarter: (value: starterType) => void,
 };

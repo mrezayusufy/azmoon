@@ -3,6 +3,7 @@ import { ContextProps } from '@/types';
 import { initialState, reducer } from './app-reducer';
 import { IQuestion, ITeam } from '@/interfaces';
 import { SHORTCUTS } from '@/constants';
+import { starterType } from '@/types/app.type';
 
 const AppContext = createContext<ContextProps | undefined>(undefined);
 
@@ -14,6 +15,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   }
   const setQuestion = (question: IQuestion) => {
     dispatch({type: "SET_QUESTION", payload: question})
+  }
+  const setStarter = (value: starterType) => {
+    dispatch({type: "SET_STARTER", payload: value})
   }
   const setWinner = (value: string) => {
     dispatch({type: "SET_WINNER", payload: value})
@@ -48,7 +52,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   }
   // sync localstorage
   const onStorageUpdate = (e: StorageEvent) => {
-    const { key, newValue } = e as {key: string, newValue: string};
+    const { key, newValue } = e as {key: string, newValue: any};
     if (key === "orderId") {
       setOrderId(parseInt(newValue));
     } else if (key === "announcer") {
@@ -63,6 +67,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       setCode(newValue);
     } else if (key === "selected") {
       setSelected(newValue);
+    } else if (key === "starter") {
+      setStarter(JSON.parse(newValue));
     }
   };
  
@@ -96,6 +102,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     setTeam,
     toggleSidebar,
     setWinner,
+    setStarter,
     dispatch
   }
   return (
