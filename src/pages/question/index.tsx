@@ -3,6 +3,7 @@ import { Question } from "@/components";
 import { getQuestion } from "@/services"
 import { useQuestionStore } from "@/store";
 import { useAppContext } from "@/contexts";
+import { Countdown } from "@/components/Countdown/Countdown.component";
 export const QuestionPage = () => {
   const {state}= useAppContext();
 

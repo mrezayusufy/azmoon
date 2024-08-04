@@ -47,7 +47,7 @@ body {
   @apply w-[160px] flex relative;
 }
 .option > p {
-  @apply text-lg opacity-0 transition-opacity duration-100 absolute inset-0 pb-2 text-white w-full z-10 grid place-content-center;
+  @apply text-lg opacity-0 transition-opacity duration-100 absolute inset-0 pb-2 text-white w-full z-20 grid place-content-center;
 }
 .question {
   @apply relative;

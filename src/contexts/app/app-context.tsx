@@ -14,6 +14,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const setQuestion = (question: IQuestion) => {
     dispatch({type: "SET_QUESTION", payload: question})
   }
+  const setWinner = (value: string) => {
+    dispatch({type: "SET_WINNER", payload: value})
+  }
   const setTeam = (value: ITeam) => {
     dispatch({type: "SET_TEAM", payload: value})
   }
@@ -63,8 +66,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   };
   // keyboard event handler for increment and nav to home page
   const eventListener = (event: KeyboardEvent) => {
-    if (event.key === "i" || event.key === "ه") incrementOrderId();
-    if (event.key === "y" || event.key === "غ") document.location.replace("/")
+    if (event.ctrlKey && (event.key === "i" || event.key === "ه")) incrementOrderId();
+    if (event.ctrlKey && (event.key === "y" || event.key === "غ")) document.location.replace("/")
   }
 
   useEffect(() => {
@@ -89,6 +92,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     setSelected,
     setTeam,
     toggleSidebar,
+    setWinner,
     dispatch
   }
   return (

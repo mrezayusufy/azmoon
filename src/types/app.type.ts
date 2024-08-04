@@ -7,6 +7,7 @@ export type State = {
   answer: string;
   question: IQuestion | null;
   announcer: string;
+  winner: string | null;
   selected: string;
   team: ITeam | null;
   showSidebar: boolean;
@@ -19,6 +20,7 @@ export type Action =
   | { type: 'SET_SELECTED'; payload: string }
   | { type: 'SET_ANNOUNCER'; payload: string }
   | { type: 'SET_TEAM'; payload: ITeam }
+  | { type: 'SET_WINNER'; payload: string }
   | { type: 'TOGGLE_SIDEBAR' }
   | { type: 'RESET' }
   | { type: 'CHECK_ANSWER', payload: {isChecked: boolean}}
@@ -38,4 +40,5 @@ export type ContextProps = {
   reset: () => void,
   toggleSidebar: () => void,
   setAnnouncer: (value: string) => void,
+  setWinner: (value: string) => void,
 };

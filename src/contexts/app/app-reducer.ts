@@ -2,6 +2,7 @@ import { State, Action } from '@/types';
 
 export const initialState: State = {
   showSidebar: true,
+  winner: localStorage.getItem('winner') || '',
   team: null,
   orderId: parseInt(localStorage.getItem('orderId') as string) || 0,
   isChecked: Boolean(JSON.parse(localStorage.getItem('isChecked') as string)) || false,
@@ -34,6 +35,12 @@ export const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         team: action.payload,
+      };
+    case "SET_WINNER":
+      localStorage.setItem('winner', action.payload);
+      return {
+        ...state,
+        winner: action.payload,
       };
     case "SET_SELECTED": 
       localStorage.setItem('selected', action.payload);

@@ -1,13 +1,13 @@
 import { Option } from "./Option.component";
-import { useQuestionStore } from "../store";
+import { useQuestionStore } from "@/store";
 import { useAppContext } from "@/contexts";
 
 export const OptionItem = () => {
-  const {selectedAnswer, answerChecked, question} = useQuestionStore()
   const { state } = useAppContext();
+  const {isChecked, answer, question} = state;
   let color = '';
-  if(answerChecked)
-    if(selectedAnswer === question?.correctAnswer) 
+  if(isChecked)
+    if(answer === question?.correctAnswer) 
       color = "truthy";
     else 
       color = "falsy";

@@ -20,8 +20,7 @@ export const HostIntro: React.FC<Props> = ({title, subtitle}) => {
 
     HOST_INTRO.forEach((frame, index) => {
       tl.current!.to(imgRef.current, {
-        duration: 0.04, // Adjust duration as needed
-        onStart: () => setCurrentFrame(index),
+        duration: 0.04, 
         onUpdate: () => {
           if (imgRef.current) {
             imgRef.current.src = frame;
