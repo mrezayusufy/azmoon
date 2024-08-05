@@ -10,7 +10,7 @@ export const initialState: State = {
   answer: localStorage.getItem("answer") || '',
   announcer: localStorage.getItem("announcer") || '',
   selected: localStorage.getItem("selected") || '',
-  question: JSON.parse(localStorage.getItem("question") as string) || null,
+  question: localStorage.getItem("question") && JSON.parse(localStorage.getItem("question") as string) || null,
   starter: JSON.parse(localStorage.getItem("starter") as string) || {IsAnnouncer: false, IsScore: false, IsQuestion: false, IsWinner: false},
 };
 
