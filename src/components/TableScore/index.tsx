@@ -6,7 +6,6 @@ import { ITeam } from '@/interfaces';
 import { _p } from '@/utils';
 type Props = {
   item: ITeam;
-
 }
 export const TableScore: React.FC<Props> = ({ item }) => {
   const {setAnswer, checkAnswer, state} = useAppContext();

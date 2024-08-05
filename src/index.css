@@ -71,5 +71,8 @@ kbd {
   font-size: 1.5rem;
   font-weight: bold;
 }
-
+main {
+  max-height: calc(100vh - 117px);
+  overflow-y: scroll;
+}
 

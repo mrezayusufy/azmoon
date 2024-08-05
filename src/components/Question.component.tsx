@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Option } from "./Option.component";
 import { IQuestion } from "@/interfaces";
 import { QuestionItem } from "./QuestionItem.component";
@@ -6,12 +6,13 @@ import { Timer } from "./Timer.component";
 import { cn } from "@/utils";
 import { OptionItem } from "./OptionItem.component";
 import { useAppContext } from "@/contexts"; 
+import useSound from "use-sound";
+
 interface Props {
   question: IQuestion;
 }
 export const Question: React.FC<Props> = ({ question }) => {
   const { state, setQuestion } = useAppContext();
-
   useEffect(() => {
     if (question) setQuestion(question);
   }, []);
@@ -20,6 +21,14 @@ export const Question: React.FC<Props> = ({ question }) => {
     FLASE = "غلط",
     TRUE = "صحیح",
   }
+
+  const getColor = (item: string) => {
+    if (Boolean(state.isChecked)) {
+      if (item === question.correctAnswer) return "truthy";
+      if (item === state.answer) return "falsy";
+    } else if (item === state.answer) return "selected";
+    return "";
+  };
   const opt = [OPTION_ENUM.FLASE, OPTION_ENUM.TRUE];
   return (
     <section className="w-[500px] mb-10 flex flex-col gap-y-4 justify-center">
@@ -28,34 +37,22 @@ export const Question: React.FC<Props> = ({ question }) => {
         <QuestionItem content={question.content} />
         {question?.questionType === 0 && <OptionItem />}
         {question?.questionType === 2 &&
-          question.options.split("،").map((item: string) => {
-            let color = "";
-            const isChecked = Boolean(state.isChecked)
-            if (isChecked) {
-              if(item === question?.correctAnswer) color = "truthy" 
-              else if (item === state.answer) color = "falsy";
-            } else if(item === state.answer) color = "selected";
+          question.options.split("،").map((item: string) => { 
             return (
               <div className="w-[160px]" key={item}>
-                <Option content={item} color={color} />
+                <Option content={item} color={getColor(item)} />
               </div>
             );
           })}
         {question?.questionType === 1 &&
-          opt.map((item) => {
-            let color = "";
-            const isChecked = Boolean(state.isChecked)
-            if (isChecked) {
-              if(item === question?.correctAnswer) color = "truthy" 
-              else if (item === state.answer) color = "falsy";
-            } else if(item === state.answer) color = "selected";
+          opt.map((item) => { 
             return (
               <div
                 key={item}
                 className={cn("transition-all duration-300")}
               >
                 <Option
-                  color={color}
+                  color={getColor(item)}
                   content={item}
                 />
               </div>

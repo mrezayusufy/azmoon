@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
-import { HOST_INTRO } from '../constants';
+import { HOST_INTRO, SHORTCUTS } from '../constants';
 type Props = {
   title: string;
   subtitle: string;
@@ -39,9 +39,9 @@ export const HostIntro: React.FC<Props> = ({title, subtitle}) => {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      (event.key === 'h' || event.key === 'ا') &&
+      (event.key === SHORTCUTS.hostPlay.key || event.key === SHORTCUTS.hostPlay.persianKey) &&
         tl.current?.play();
-      (event.key === 'H' || event.key === 'آ') &&
+      (event.key === SHORTCUTS.hostReverse.key || event.key === SHORTCUTS.hostReverse.persianKey) &&
         tl.current?.reverse();
     };
 

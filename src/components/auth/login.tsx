@@ -19,7 +19,7 @@ export const Login: React.FC = () => {
       const response = await getTeam(data.code);
       setCode(data.code);
       setTeam(response.data)
-      navigate('/');
+      window.location.replace("/")
     } catch (error) {
       console.error('Login failed:', error);
     }

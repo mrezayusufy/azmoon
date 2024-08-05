@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import { gsap } from 'gsap';
-import { TIMER } from '@/constants';
+import { TIMER, TIMER_AUDIO } from '@/constants';
 import { useAppContext } from '@/contexts';
 import { _p } from '@/utils';
+import useSound from 'use-sound';
 
 type Props = {
   timer: number;
@@ -11,23 +12,26 @@ type Props = {
 export const Timer: React.FC<Props> = ({ timer }) => {
   const {checkAnswer}= useAppContext()
   const [countdown, setCountdown] = useState(timer);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const countdownRef = useRef<NodeJS.Timeout | null>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);
   const textRef = useRef<HTMLDivElement | null>(null);
   const tl = useRef<GSAPTimeline | null>(null);
-
+  const audioTL = gsap.timeline({ paused: true });
   useEffect(() => {
     tl.current = gsap.timeline({ paused: true });
     TIMER.forEach((frame, index) => {
       tl.current!.to(imgRef.current, {
         duration: 0.04, 
         onUpdate: () => {
+          if(index === 0) audioRef.current?.play();
           imgRef.current && (imgRef.current.src = frame);
           if (index >= TIMER.length - 20 && textRef.current) {
             gsap.to(textRef.current, { opacity: 1, duration: 0.5 });
             startCountdown();
           } else if (index !== TIMER.length - 1 && textRef.current) {
             gsap.to(textRef.current, { opacity: 0, duration: 0.5 });
+            audioRef.current?.pause();
           }
         },
       });
@@ -35,7 +39,6 @@ export const Timer: React.FC<Props> = ({ timer }) => {
     const handleKeyDown = (event: KeyboardEvent) => {
        (event.key === 't' || event.key === 'ف') && 
         playAnimation();
-
     };
     window.addEventListener('keydown', handleKeyDown);
     
@@ -82,11 +85,16 @@ export const Timer: React.FC<Props> = ({ timer }) => {
   
 useEffect(() => {
   if (countdown === 0) {
-    checkAnswer(true);
+    setTimeout(() => {
+      checkAnswer(true);
+    }, 5000);
   }
 }, [countdown]);
   return (
     <div className='timer'>
+      <audio ref={audioRef} loop>
+        <source src={TIMER_AUDIO} type="audio/wav"/>
+      </audio>
       <div ref={textRef} >
         {countdown > 0 ? `${_p(countdown)}` : ''}
       </div>
