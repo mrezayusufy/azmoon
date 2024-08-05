@@ -77,6 +77,10 @@ export const Timer: React.FC<Props> = ({ timer }) => {
 
   const reverseAnimation = useCallback(() => {
     tl.current?.reverse();
+    if(audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
     setTimeout(() => {
       setCountdown(timer);
     }, 5000);
