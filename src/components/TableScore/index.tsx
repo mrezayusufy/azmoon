@@ -59,7 +59,7 @@ export const TableScore: React.FC<Props> = ({ item }) => {
   }
   return (
     <div className='relative w-[330px]' >
-      <div ref={textRef} className='absolute gap-x-4 text-lg grid-cols-8 text-white inset-0 grid grid-flow-col px-4 py-2 mt-0.5'>
+      <div ref={textRef} className='absolute opacity-0 gap-x-4 text-lg grid-cols-8 text-white inset-0 grid grid-flow-col px-4 py-2 mt-0.5'>
         <span className='col-span-1 text-center'>{_p(item.teamId)}</span>
         <span className='col-span-5'>{item.name}</span>
         <span className='col-span-2'>{_p(item.score)}</span>  

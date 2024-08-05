@@ -11,7 +11,6 @@ type FormData = {
 
 export const Login: React.FC = () => {
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>();
-  const navigate = useNavigate();
   const {setCode, setTeam} = useAppContext();
   const routeErrors = useRouteError() as any;
   const onSubmit: SubmitHandler<FormData> = async (data) => {

@@ -31,7 +31,6 @@ export const Timer: React.FC<Props> = ({ timer }) => {
             startCountdown();
           } else if (index !== TIMER.length - 1 && textRef.current) {
             gsap.to(textRef.current, { opacity: 0, duration: 0.5 });
-            audioRef.current?.pause();
           }
         },
       });
