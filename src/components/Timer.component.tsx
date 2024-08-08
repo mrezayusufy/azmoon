@@ -1,9 +1,8 @@
 import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import { gsap } from 'gsap';
-import { TIMER, TIMER_AUDIO } from '@/constants';
+import { SHORTCUTS, TIMER, TIMER_AUDIO } from '@/constants';
 import { useAppContext } from '@/contexts';
 import { _p } from '@/utils';
-import useSound from 'use-sound';
 
 type Props = {
   timer: number;
@@ -11,20 +10,22 @@ type Props = {
 
 export const Timer: React.FC<Props> = ({ timer }) => {
   const {checkAnswer}= useAppContext()
-  const [countdown, setCountdown] = useState(timer);
+  const [countdown, setCountdown] = useState(30);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const countdownRef = useRef<NodeJS.Timeout | null>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);
   const textRef = useRef<HTMLDivElement | null>(null);
-  const tl = useRef<GSAPTimeline | null>(null);
-  const audioTL = gsap.timeline({ paused: true });
+  const tl = useRef<GSAPTimeline | null>(null); 
   useEffect(() => {
     tl.current = gsap.timeline({ paused: true });
     TIMER.forEach((frame, index) => {
       tl.current!.to(imgRef.current, {
         duration: 0.04, 
         onUpdate: () => {
-          if(index === 0) audioRef.current?.play();
+          if(index === 0 && audioRef.current) {
+            audioRef.current.currentTime = 0;
+            audioRef.current?.play();
+          }
           imgRef.current && (imgRef.current.src = frame);
           if (index >= TIMER.length - 20 && textRef.current) {
             gsap.to(textRef.current, { opacity: 1, duration: 0.5 });
@@ -36,7 +37,7 @@ export const Timer: React.FC<Props> = ({ timer }) => {
       });
     });
     const handleKeyDown = (event: KeyboardEvent) => {
-       (event.key === 't' || event.key === 'ف') && 
+       (event.key === SHORTCUTS.timerPlay.key || event.key === SHORTCUTS.timerPlay.persianKey) && 
         playAnimation();
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -78,8 +79,10 @@ export const Timer: React.FC<Props> = ({ timer }) => {
   const reverseAnimation = useCallback(() => {
     tl.current?.reverse();
     if(audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
+      gsap.to(audioRef.current, { volume: 0, duration: 1, onComplete: () => {
+        audioRef.current?.pause();
+        audioRef.current!.currentTime = 0;
+      } });
     }
     setTimeout(() => {
       setCountdown(timer);

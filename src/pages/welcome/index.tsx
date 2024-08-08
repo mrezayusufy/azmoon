@@ -4,9 +4,19 @@ import { useAppContext } from "@/contexts";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner"
 export const Welcome = () => {
-  const { state, setOrderId, setAnswer, setAnnouncer, setWinner, setStarter } = useAppContext();
+  const { state, setOrderId, setAnswer, setAnnouncer, setWinner, setStarter, setScore } = useAppContext();
   // starter
   const {IsAnnouncer,IsQuestion,IsScore,IsWinner} = state.starter
+  //----- score -----
+  const {
+    register: registerScore,
+    handleSubmit: handleSubmitScore,
+    formState: { errors: errorsScore, isSubmitting: isSubmittingScore },
+  } = useForm({
+    defaultValues: {
+      score: state.score,
+    },
+  });
   //----- winner -----
   const {
     register: registerWinner,
@@ -50,6 +60,10 @@ export const Welcome = () => {
   const onSubmitOrderId = (data: any) => {
     setOrderId(data.orderId)
     toast("نوبت سوال با موفقیت ثبت شد");
+  };
+  const onSubmitScore = (data: any) => {
+    setScore(data.score)
+    toast("امتیاز با موفقیت ثبت شد");
   };
   const onSubmitWinner = (data: any) => {
     setWinner(data.winner)
@@ -140,6 +154,15 @@ export const Welcome = () => {
               errors={errorsWinner.winner}
               defaultValue={state.winner}
               label="نام برنده بازی"
+              buttonText="ثبت کنید"
+            /> 
+            {/* score */}
+            <FormComponent
+              onSubmit={handleSubmitScore(onSubmitScore)}
+              register={registerScore("score", { required: true })}
+              errors={errorsScore.score}
+              defaultValue={state.score}
+              label="امتیاز بازی"
               buttonText="ثبت کنید"
             /> 
             

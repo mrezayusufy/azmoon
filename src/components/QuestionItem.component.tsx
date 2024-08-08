@@ -1,18 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ONE_QUESTION_FRAMES, SHORTCUTS } from '@/constants';
 import { Title } from './Title.component';
-import useSound from 'use-sound'; 
+import { TEXT_OPENER_AUDIO } from '@/constants/TEXT_OPENER_AUDIO';
 type Props = {
   content: string;
 }
 export const QuestionItem: React.FC<Props> = ({content}) => {
-  const [play] = useSound("/sound/TEXT_OPENER.wav",{
-    playbackRate: 1.5,
-
-  });
   const imgRef = useRef<HTMLImageElement | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null); 
   const textRef = useRef<HTMLDivElement | null>(null);
   const tl = useRef<GSAPTimeline | null>(null);
   useEffect(() => {
@@ -23,7 +19,6 @@ export const QuestionItem: React.FC<Props> = ({content}) => {
         duration: 0.04, // adjust duration as needed
         onUpdate: () => {
           (imgRef.current) && (imgRef.current.src = frame);
-          if(index === 0) play();
           if (index >= ONE_QUESTION_FRAMES.length - 50 && textRef.current) {
             gsap.to(textRef.current, { opacity: 1, duration: 0.5 });
           } else if (index !== ONE_QUESTION_FRAMES.length - 1 && textRef.current) {
@@ -53,14 +48,25 @@ export const QuestionItem: React.FC<Props> = ({content}) => {
 
   const playAnimation = () => {
     tl.current?.play();
+    if(audioRef.current){
+      audioRef.current.currentTime = 1;
+      audioRef.current?.play();
+    }
   };
 
   const reverseAnimation = () => {
     tl.current?.reverse();
+    if(audioRef.current) {
+      audioRef.current!.currentTime = 1;
+      audioRef.current.play();
+    }
   };
 
   return (
     <section className='question'>
+      <audio ref={audioRef}>
+        <source src={TEXT_OPENER_AUDIO} type="audio/wav"/>
+      </audio>
       <div ref={textRef} className='opacity-0'>
         <Title text={content} maxLength={18}/>
       </div>

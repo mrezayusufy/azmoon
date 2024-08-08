@@ -42,7 +42,7 @@ const Sidebar = () => {
               rel="noopener noreferrer"
             >
               <TeamIcon width={size} height={size}/>
-              <span className="align-middle me-2">نمایش تیم ها</span>
+              <span className="align-middle me-2">  لیست امتیاز تیم ها</span>
             </NavLink>
           </li>
           <li className="sidebar-item">

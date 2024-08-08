@@ -1,19 +1,33 @@
+import { IQuestion } from '@/interfaces';
 import { State, Action } from '@/types';
 
 export const initialState: State = {
   showSidebar: true,
   winner: localStorage.getItem('winner') || '',
+  score: localStorage.getItem("orderId") && parseInt(localStorage.getItem("score") as string) || 0,
   team: null,
-  orderId: parseInt(localStorage.getItem('orderId') as string) || 0,
+  orderId: localStorage.getItem("orderId") && parseInt(localStorage.getItem('orderId') as string) || 0,
   isChecked: Boolean(JSON.parse(localStorage.getItem('isChecked') as string)) || false,
   code: localStorage.getItem('code') || '',
   answer: localStorage.getItem("answer") || '',
   announcer: localStorage.getItem("announcer") || '',
   selected: localStorage.getItem("selected") || '',
-  question: JSON.parse(localStorage.getItem("question") as string) || null,
+  question: localStorage.getItem("question") && JSON.parse(localStorage.getItem("question") as string) || null,
   starter: JSON.parse(localStorage.getItem("starter") as string) || {IsAnnouncer: false, IsScore: false, IsQuestion: false, IsWinner: false},
 };
-
+const question: IQuestion = {
+  questionType: 0,
+  orderId: 0,
+  categoryId: 0,
+  content: "",
+  competitionId: 0,
+  correctAnswer: "",
+  id: 1,
+  options: "",
+  optionsList: [],
+  score: 0,
+  timer: 0,
+} 
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "CHECK_ANSWER": 
@@ -31,6 +45,13 @@ export const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         question: action.payload,
+      };
+    case "SET_SCORE": 
+      const score = action.payload;
+      localStorage.setItem('score', score.toString());
+      return {
+        ...state,
+        score: score,
       };
     case "SET_STARTER": 
       localStorage.setItem('starter', JSON.stringify(action.payload));
@@ -69,12 +90,12 @@ export const reducer = (state: State, action: Action): State => {
       };
     case 'SET_ORDER_ID':
       const newOrderId = action.payload;
-      console.log("orderId",newOrderId);
+       
       localStorage.setItem('orderId', newOrderId.toString());
       return { ...state, orderId: newOrderId };
     case 'INCREMENT_ORDER_ID':
       const orderId = state.orderId+1;
-      console.log("orderId",orderId);
+      localStorage.setItem("isChecked", "false");
       localStorage.setItem('orderId', orderId.toString());
       return { ...state, orderId: orderId };
     case 'SET_CODE':
@@ -89,8 +110,8 @@ export const reducer = (state: State, action: Action): State => {
       localStorage.setItem('announcer', '');
       localStorage.setItem('answer', '');
       localStorage.setItem('isChecked', 'false');
-      localStorage.setItem('question', '');
-      return { ...state, question: null, code: "", orderId: 0, announcer: "", answer: "", isChecked: false  };
+      localStorage.setItem('question', JSON.stringify(question));
+      return { ...state, question: question, code: "", orderId: 0, announcer: "", answer: "", isChecked: false  };
     default:
       return state;
   }

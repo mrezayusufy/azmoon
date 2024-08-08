@@ -19,6 +19,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const setStarter = (value: starterType) => {
     dispatch({type: "SET_STARTER", payload: value})
   }
+  const setScore = (value: number) => {
+    dispatch({type: "SET_SCORE", payload: value})
+  }
   const setWinner = (value: string) => {
     dispatch({type: "SET_WINNER", payload: value})
   }
@@ -57,6 +60,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       setOrderId(parseInt(newValue));
     } else if (key === "announcer") {
       setAnnouncer(newValue);
+    } else if (key === "score") {
+      setScore(newValue);
     } else if (key === "answer") {
       setAnswer(newValue);
     } else if (key === "question") {
@@ -102,6 +107,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     toggleSidebar,
     setWinner,
     setStarter,
+    setScore,
     dispatch
   }
   return (

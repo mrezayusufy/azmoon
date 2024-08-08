@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
-import { OPTION } from '@/constants';
+import { OPTION, SHORTCUTS } from '@/constants';
 import { cn } from '@/utils'; 
 import { useAppContext } from '@/contexts'; 
 type OptionProp = {
@@ -12,7 +12,7 @@ export const Option: React.FC<OptionProp> = ({ content, color }: OptionProp) => 
   const imgRef = useRef<HTMLImageElement | null>(null);
   const textRef = useRef<HTMLDivElement | null>(null);
   const tl = useRef<GSAPTimeline | null>(null);
- 
+
   useEffect(() => {
     // Initialize GSAP timeline
     tl.current = gsap.timeline({ paused: true });
@@ -23,7 +23,7 @@ export const Option: React.FC<OptionProp> = ({ content, color }: OptionProp) => 
         onUpdate: () => {
           (imgRef.current) && (imgRef.current.src = frame);
           (index >= OPTION.length - 20 && textRef.current) && 
-            gsap.to(textRef.current, { opacity: 1, duration: 0.5 });
+            gsap.to(textRef.current, { opacity: 1, duration: 0.05});
           (index !== OPTION.length - 1 && textRef.current) &&
             gsap.to(textRef.current, { opacity: 0, duration: 0.05 });
         },
@@ -38,9 +38,9 @@ export const Option: React.FC<OptionProp> = ({ content, color }: OptionProp) => 
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      (event.key === 'a' || event.key === 'ش') &&
+      (event.key === SHORTCUTS.answerPlay.key || event.key === SHORTCUTS.answerPlay.persianKey) &&
         playAnimation();
-      (event.shiftKey && (event.key === 'A' || event.key === 'َ')) &&
+      (event.shiftKey && (event.key === SHORTCUTS.answerReverse.key || event.key === SHORTCUTS.answerReverse.persianKey)) &&
         reverseAnimation();
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -54,8 +54,10 @@ export const Option: React.FC<OptionProp> = ({ content, color }: OptionProp) => 
   }
   const reverseAnimation = () => {
     tl.current?.reverse();
-    checkAnswer(false);
-    setAnswer("")
+    setTimeout(() => {
+      checkAnswer(false);
+      setAnswer("")
+    }, 4000);
   }
   const playAnimation = () => {
     tl.current?.play();

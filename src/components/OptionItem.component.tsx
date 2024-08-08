@@ -1,5 +1,5 @@
+import { cn } from "@/utils";
 import { Option } from "./Option.component";
-import { useQuestionStore } from "@/store";
 import { useAppContext } from "@/contexts";
 
 export const OptionItem = () => {
@@ -13,7 +13,7 @@ export const OptionItem = () => {
       color = "falsy";
   else 
     color = "selected";
-  return <div className="w-[160px]">
+  return <div className={cn("w-[160px]", state.answer.length > 0 ? "visible" : "invisible")}>
     <Option content={state.answer} color={color}/>
   </div>
 }

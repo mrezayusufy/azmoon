@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
-import { TABLE_SCORE } from '@/constants';
+import { SHORTCUTS, TABLE_SCORE } from '@/constants';
 import { useAppContext } from '@/contexts';
 import { ITeam } from '@/interfaces';
 import { _p } from '@/utils';
@@ -38,9 +38,9 @@ export const TableScore: React.FC<Props> = ({ item }) => {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      (event.key === 's' || event.key === 'س') &&
+      (event.key === SHORTCUTS.scorePlay.key || event.key === SHORTCUTS.scorePlay.persianKey) &&
         playAnimation();
-      (event.shiftKey && (event.key === 'S' || event.key === 'ُ')) &&
+      (event.shiftKey && (event.key === SHORTCUTS.scoreReverse.key || event.key === SHORTCUTS.scoreReverse.persianKey)) &&
         reverseAnimation();
     };
     window.addEventListener('keydown', handleKeyDown);

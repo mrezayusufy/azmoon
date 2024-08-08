@@ -8,7 +8,7 @@ body {
 * {
   user-select: none;
 }
-kbd {
+kbd, pre, code {
   direction: ltr !important;
   border-radius: 5px;
 }
@@ -37,6 +37,9 @@ kbd {
 }
 .timer > div {
   @apply pt-3 opacity-0 transition-all duration-300 absolute text-4xl bottom-[85px] text-white right-[165px] size-14 grid place-content-center ;
+}
+.timer > p {
+  @apply pt-3 z-20 text-white opacity-0 transition-all duration-300 absolute text-5xl bottom-[85px]  right-[127px] text-center size-14 grid place-content-center;
 }
 .falsy {
   filter: hue-rotate(150deg)
@@ -75,4 +78,4 @@ main {
   max-height: calc(100vh - 117px);
   overflow-y: scroll;
 }
-
+ 

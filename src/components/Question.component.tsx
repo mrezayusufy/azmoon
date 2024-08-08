@@ -6,7 +6,7 @@ import { Timer } from "./Timer.component";
 import { cn } from "@/utils";
 import { OptionItem } from "./OptionItem.component";
 import { useAppContext } from "@/contexts"; 
-import useSound from "use-sound";
+import { ScoreComponent } from "./Score/Score.component";
 
 interface Props {
   question: IQuestion;
@@ -35,7 +35,7 @@ export const Question: React.FC<Props> = ({ question }) => {
 
       <section className="flex flex-wrap gap-3 items-center justify-center">
         <QuestionItem content={question.content} />
-        {question?.questionType === 0 && <OptionItem />}
+        {question?.questionType === 0 && state.answer.length > 0 && <OptionItem />}
         {question?.questionType === 2 &&
           question.options.split("،").map((item: string) => { 
             return (
@@ -61,6 +61,9 @@ export const Question: React.FC<Props> = ({ question }) => {
       </section>
       <div className="absolute right-0 bottom-0 w-[500px]">
         <Timer timer={question.timer} />
+      </div>
+      <div className="absolute right-0 bottom-0 w-[500px]">
+        <ScoreComponent content={state.score} />
       </div>
     </section>
   );

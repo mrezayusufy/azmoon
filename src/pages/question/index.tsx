@@ -2,9 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import { Question } from "@/components";
 import { getQuestion } from "@/services"
 import { useAppContext } from "@/contexts";
+import { useEffect } from "react";
 export const QuestionPage = () => {
+  useEffect(() => {
+      document.title = "سوالات"
+  }, [])
   const {state}= useAppContext();
-
   const {
     data,
     isError,
@@ -14,6 +17,7 @@ export const QuestionPage = () => {
     queryFn: () => getQuestion(state.code, state.orderId.toString()),
     staleTime: 5000,
   });
+  
   if (isError && !data) return null;
   if (isLoading) return null;
 
