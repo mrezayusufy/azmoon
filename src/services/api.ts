@@ -1,4 +1,4 @@
-const BASE_URL: string = "http://173.249.57.172:1403/api";
+const BASE_URL: string = import.meta.env.VITE_API_URL as string;
 const CACHE_NAME: string = "ApiCache_v1"; // Cache name for versioning
 
 export class Api {

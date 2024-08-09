@@ -100,6 +100,9 @@ export const Welcome = () => {
       setStarter({...starter, IsWinner: boolValue})
     }
   };
+  const BASE_URL: string = process.env.API_URL as string;
+  const url = import.meta.env.VITE_API_URL;
+  console.log(url)
   return <div className="container">
       <div className="row justify-content-center">
       <details className="bg-white py-3 px-3 rounded-md mb-3 flex flex-col gap-y-3">
