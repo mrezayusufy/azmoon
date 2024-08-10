@@ -5,9 +5,9 @@ import { jsonParse } from '@/utils';
 export const initialState: State = {
   showSidebar: true,
   winner: localStorage.getItem("winner") || '',
-  score: jsonParse("score") || 0,
+  score: parseInt(localStorage.getItem("score") as string) || 1,
   teams: jsonParse("teams") || [],
-  orderId: jsonParse("orderdId") || 0,
+  orderId: parseInt(localStorage.getItem("orderId") as string) || 1,
   isChecked: Boolean(jsonParse("isChecked")) || false,
   code: localStorage.getItem('code') || '',
   answer: localStorage.getItem("answer") || '',

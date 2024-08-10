@@ -52,6 +52,9 @@ code {
 .selected {
   filter: hue-rotate(190deg);
 }
+p {
+  all: unset;
+}
 .option {
   @apply w-[160px] flex relative;
 }
@@ -123,76 +126,14 @@ main {
 :after,
 :before {
   box-sizing: border-box;
+  font-family: iranyekan;
 }
 @media (prefers-reduced-motion: no-preference) {
   :root {
     scroll-behavior: smooth;
   }
 }
-body {
-  margin: 0;
-  font-family: iranyekan;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.625;
-  color: #6c757d;
-  -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-hr {
-  margin: 1rem 0;
-  color: inherit;
-  background-color: currentColor;
-  border: 0;
-  opacity: 0.25;
-}
-hr:not([size]) {
-  height: 1px;
-}
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  line-height: 1.2;
-  color: #495057;
-}
-.h1,
-h1 {
-  font-size: 1.65rem;
-}
-.h2,
-h2 {
-  font-size: 1.44375rem;
-}
-.h3,
-h3 {
-  font-size: 1.2375rem;
-}
-.h4,
-h4 {
-  font-size: 1.03125rem;
-}
-.h5,
-.h6,
-h5,
-h6 {
-  font-size: 0.825rem;
-}
-p {
-  margin-top: 0;
-  margin-bottom: 1rem;
-}
+
 abbr[data-bs-original-title],
 abbr[title] {
   -webkit-text-decoration: underline dotted;
@@ -206,58 +147,7 @@ address {
   font-style: normal;
   line-height: inherit;
 }
-ol,
-ul {
-  padding-left: 2rem;
-}
-dl,
-ol,
-ul {
-  margin-top: 0;
-  margin-bottom: 1rem;
-}
-ol ol,
-ol ul,
-ul ol,
-ul ul {
-  margin-bottom: 0;
-}
-dt {
-  font-weight: 500;
-}
-dd {
-  margin-bottom: 0.5rem;
-  margin-left: 0;
-}
-blockquote {
-  margin: 0 0 1rem;
-}
-b,
-strong {
-  font-weight: bolder;
-}
-.small,
-small {
-  font-size: 80%;
-}
-.mark,
-mark {
-  padding: 0.2em;
-  background-color: #fcf8e3;
-}
-sub,
-sup {
-  position: relative;
-  font-size: 0.75em;
-  line-height: 0;
-  vertical-align: baseline;
-}
-sub {
-  bottom: -0.25em;
-}
-sup {
-  top: -0.5em;
-}
+ 
 a {
   color: #3f80ea;
   text-decoration: none;

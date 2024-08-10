@@ -12,7 +12,7 @@ export const FormComponent : React.FC<Props> = ({
   label,
   buttonText,
 }) => (
-  <div className="col-md-5 mt-4 mt-md-0 ">
+  <div className="col-md-3 mt-4 mt-md-0 ">
     <div className="bg-white shadow-lg mb-4 rounded-xl">
       <div className="card-body">
         <form onSubmit={onSubmit}>

@@ -67,7 +67,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     } else if (key === "question") {
       setQuestion(JSON.parse(newValue))
     } else if (key === "teams") {
-      setQuestion(JSON.parse(newValue))
+      setTeam(JSON.parse(newValue))
     } else if (key === "isChecked") {
       checkAnswer(JSON.parse(newValue));
     } else if (key === "code") {

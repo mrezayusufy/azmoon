@@ -29,8 +29,9 @@ export const ScoreForm = () => {
       toast.error("امتیاز ثبت نشد")
     }
   }
-  return <form className="bg-white shadow-lg mb-4 rounded-xl col-md-5 mt-4 mt-md-0" onSubmit={handleSubmit(onSubmit)}>
-  <ul className="card-body">
+  return <form className="bg-white shadow-lg mb-4 px-4 py-4 rounded-xl col-md-5 mt-4 mt-md-0" onSubmit={handleSubmit(onSubmit)}>
+  <h1 className="font-bold text-gray-700">ثبت امتیاز</h1>
+  <ul className="card-body flex flex-col gap-y-2">
     {state.teams?.map(item => <li key={item.teamId}>
       <label className="flex gap-x-2" >
         <input type="radio" value={item.teamId} {...register("teamId")} />

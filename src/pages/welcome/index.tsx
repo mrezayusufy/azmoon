@@ -11,13 +11,13 @@ type ScoreInput = {
 export const Welcome = () => {
   const { state, setOrderId, setAnswer, setAnnouncer, setWinner, setStarter } = useAppContext();
   // starter
-  const {IsAnnouncer,IsQuestion,IsScore,IsWinner} = state.starter
-   
+  const { IsAnnouncer, IsQuestion, IsScore, IsWinner } = state.starter
+
   //+++++++++++++ winner +++++++++++++
   const {
     register: registerWinner,
     handleSubmit: handleSubmitWinner,
-    formState: { errors: errorsWinner},
+    formState: { errors: errorsWinner },
   } = useForm({
     defaultValues: {
       winner: state.winner,
@@ -27,7 +27,7 @@ export const Welcome = () => {
   const {
     register: registerOrderId,
     handleSubmit: handleSubmitOrderId,
-    formState: { errors: errorsOrderId},
+    formState: { errors: errorsOrderId },
   } = useForm({
     defaultValues: {
       orderId: state.orderId,
@@ -58,7 +58,7 @@ export const Welcome = () => {
     setOrderId(data.orderId)
     toast("نوبت سوال با موفقیت ثبت شد");
   };
-   
+
   const onSubmitWinner = (data: any) => {
     setWinner(data.winner)
     toast("برنده بازی با موفقیت ثبت شد");
@@ -72,7 +72,7 @@ export const Welcome = () => {
   const onSubmitAnnouncer = (data: any) => {
     setAnnouncer(data.announcer);
     toast("نام گوینده بازی با موفقیت ثبت شد");
-  }; 
+  };
 
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -85,17 +85,17 @@ export const Welcome = () => {
     }
     // به روز رسانی وضعیت‌ها
     if (name === "IsAnnouncer") {
-      setStarter({...starter, IsAnnouncer: boolValue})
+      setStarter({ ...starter, IsAnnouncer: boolValue })
     } else if (name === "IsQuestion") {
-      setStarter({...starter, IsQuestion: boolValue})
+      setStarter({ ...starter, IsQuestion: boolValue })
     } else if (name === "IsScore") {
-      setStarter({...starter, IsScore: boolValue})
+      setStarter({ ...starter, IsScore: boolValue })
     } else if (name === "IsWinner") {
-      setStarter({...starter, IsWinner: boolValue})
+      setStarter({ ...starter, IsWinner: boolValue })
     }
   };
   return <div className="container">
-      <div className="row justify-content-center">
+    <div className="row justify-content-center">
       <details className="bg-white py-3 px-3 rounded-md mb-3 flex flex-col gap-y-3">
         <summary>شارتکت ها</summary>
         <ol >
@@ -113,44 +113,44 @@ export const Welcome = () => {
           })}
         </ol>
       </details>
-          <div className="row justify-center">
-            {/* orderId */}
-            <FormComponent
-              onSubmit={handleSubmitOrderId(onSubmitOrderId)}
-              register={registerOrderId("orderId", { required: true })}
-              errors={errorsOrderId.orderId}
-              label="نوبت سوال"
-              buttonText="ثبت کنید"
-            /> 
-            {/* answer */}
-            <FormComponent
-              onSubmit={handleSubmitAnswer(onSubmitAnswer)}
-              register={registerAnswer("answer", { required: true })}
-              errors={errorsAnswer.answer} 
-              label="جواب سوال"
-              buttonText="ثبت کنید"
-            /> 
-            {/* announcer */}
-            <FormComponent
-              onSubmit={handleSubmitAnnouncer(onSubmitAnnouncer)}
-              register={registerAnnouncer("announcer", { required: true })}
-              errors={errorsAnnouncer.announcer} 
-              label="نام گوینده"
-              buttonText="ثبت کنید"
-            />
-            {/* winner */}
-            <FormComponent
-              onSubmit={handleSubmitWinner(onSubmitWinner)}
-              register={registerWinner("winner", { required: true })}
-              errors={errorsWinner.winner} 
-              label="نام برنده بازی"
-              buttonText="ثبت کنید"
-            /> 
-            {/* score */}
-            <ScoreForm/>
-            
-          </div>
-          <div className="row mt-4">
+      <div className="row justify-center">
+        {/* orderId */}
+        <FormComponent
+          onSubmit={handleSubmitOrderId(onSubmitOrderId)}
+          register={registerOrderId("orderId", { required: true })}
+          errors={errorsOrderId.orderId}
+          label="نوبت سوال"
+          buttonText="ثبت کنید"
+        />
+        {/* answer */}
+        <FormComponent
+          onSubmit={handleSubmitAnswer(onSubmitAnswer)}
+          register={registerAnswer("answer", { required: true })}
+          errors={errorsAnswer.answer}
+          label="جواب سوال"
+          buttonText="ثبت کنید"
+        />
+        {/* announcer */}
+        <FormComponent
+          onSubmit={handleSubmitAnnouncer(onSubmitAnnouncer)}
+          register={registerAnnouncer("announcer", { required: true })}
+          errors={errorsAnnouncer.announcer}
+          label="نام گوینده"
+          buttonText="ثبت کنید"
+        />
+        {/* winner */}
+        <FormComponent
+          onSubmit={handleSubmitWinner(onSubmitWinner)}
+          register={registerWinner("winner", { required: true })}
+          errors={errorsWinner.winner}
+          label="نام برنده بازی"
+          buttonText="ثبت کنید"
+        />
+        {/* score */}
+        <ScoreForm />
+
+      </div>
+      <div className="row mt-4">
         {["IsAnnouncer", "IsScore", "IsWinner", "IsQuestion"].map(
           (item, index) => (
             <div className="col-md-3" key={index}>
@@ -169,10 +169,10 @@ export const Welcome = () => {
                         item === "IsAnnouncer"
                           ? IsAnnouncer
                           : item === "IsQuestion"
-                          ? IsQuestion
-                          : item === "IsScore"
-                          ? IsScore
-                          : IsWinner
+                            ? IsQuestion
+                            : item === "IsScore"
+                              ? IsScore
+                              : IsWinner
                       }
                       onChange={handleRadioChange}
                     />
@@ -188,10 +188,10 @@ export const Welcome = () => {
                         item === "IsAnnouncer"
                           ? !IsAnnouncer
                           : item === "IsQuestion"
-                          ? !IsQuestion
-                          : item === "IsScore"
-                          ? !IsScore
-                          : !IsWinner
+                            ? !IsQuestion
+                            : item === "IsScore"
+                              ? !IsScore
+                              : !IsWinner
                       }
                       onChange={handleRadioChange}
                     />
@@ -203,6 +203,6 @@ export const Welcome = () => {
           )
         )}
       </div>
-      </div>
     </div>
+  </div>
 };
