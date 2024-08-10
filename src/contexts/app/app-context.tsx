@@ -25,7 +25,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const setWinner = (value: string) => {
     dispatch({type: "SET_WINNER", payload: value})
   }
-  const setTeam = (value: ITeam) => {
+  const setTeam = (value: ITeam[]) => {
     dispatch({type: "SET_TEAM", payload: value})
   }
   const reset = () => {
@@ -65,6 +65,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     } else if (key === "answer") {
       setAnswer(newValue);
     } else if (key === "question") {
+      setQuestion(JSON.parse(newValue))
+    } else if (key === "teams") {
       setQuestion(JSON.parse(newValue))
     } else if (key === "isChecked") {
       checkAnswer(JSON.parse(newValue));

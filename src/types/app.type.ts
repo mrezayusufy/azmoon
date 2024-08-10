@@ -14,7 +14,7 @@ export type State = {
   announcer: string;
   winner: string | null;
   selected: string;
-  team: ITeam | null;
+  teams: ITeam[] | null;
   showSidebar: boolean;
   starter: starterType;
   score: number;
@@ -28,7 +28,7 @@ export type Action =
   | { type: 'SET_STARTER'; payload: starterType }
   | { type: 'SET_SELECTED'; payload: string }
   | { type: 'SET_ANNOUNCER'; payload: string }
-  | { type: 'SET_TEAM'; payload: ITeam }
+  | { type: 'SET_TEAM'; payload: ITeam[] }
   | { type: 'SET_WINNER'; payload: string }
   | { type: 'TOGGLE_SIDEBAR' }
   | { type: 'RESET' }
@@ -45,7 +45,7 @@ export type ContextProps = {
   setOrderId: (value: number) => void,
   checkAnswer: (value: boolean) => void,
   setSelected: (value: string) => void,
-  setTeam: (value: ITeam) => void,
+  setTeam: (value: ITeam[]) => void,
   reset: () => void,
   toggleSidebar: () => void,
   setAnnouncer: (value: string) => void,

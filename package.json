@@ -8,9 +8,11 @@
     "build": "vite build --mode production",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview --port 3000",
+    "purge": "purgecss --css 'dist/**/*.css' --content 'dist/**/*.!(css)' --output dist",
     "convert": "node convert.js"
   },
   "dependencies": {
+    "@mojojoejo/vite-plugin-purgecss": "^1.1.0",
     "@tanstack/react-query": "^5.51.16",
     "axios": "^1.7.2",
     "clsx": "^2.1.1",

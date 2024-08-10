@@ -36,7 +36,7 @@ export const QuestionItem: React.FC<Props> = ({content}) => {
     const handleKeyDown = (event: KeyboardEvent) => {
       (event.key === SHORTCUTS.questionPlay.key || event.key === SHORTCUTS.questionPlay.persianKey) &&
         playAnimation();
-      (event.key === SHORTCUTS.questionReverse.key || event.key === SHORTCUTS.questionReverse.key) &&
+      (event.key === SHORTCUTS.questionReverse.key || event.key === SHORTCUTS.questionReverse.persianKey) &&
         reverseAnimation();
     };
     window.addEventListener('keydown', handleKeyDown);

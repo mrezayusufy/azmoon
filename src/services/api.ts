@@ -9,16 +9,10 @@ export class Api {
   }
 
   private async cacheFirst(request: Request): Promise<Response> {
-    const cache = await caches.open(CACHE_NAME);
-    const cachedResponse = await cache.match(request);
-    if (cachedResponse) {
-      return cachedResponse;
-    }
+     
     try {
       const networkResponse = await fetch(request);
-      if (networkResponse.ok) {
-        cache.put(request, networkResponse.clone());
-      }
+       
       return networkResponse;
     } catch (error) {
       return new Response("Network error", { status: 500 });

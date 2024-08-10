@@ -1,0 +1,1 @@
+export const jsonParse = (name: string) => localStorage.hasOwnProperty(name) && JSON.parse(localStorage.getItem(name) as string); 

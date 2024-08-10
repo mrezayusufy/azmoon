@@ -11,16 +11,17 @@ type FormData = {
 
 export const Login: React.FC = () => {
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>();
-  const {setCode, setTeam, reset, } = useAppContext();
+  const {setCode, reset, setTeam } = useAppContext();
   const nav = useNavigate();
   const routeErrors = useRouteError() as any;
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     try {
       const response = await getTeam(data.code); 
+      const teams = response.data;
       reset()
       setCode(data.code);
-      setTeam(response.data);
-      nav("/")
+      setTeam(teams)
+      window.location.replace("/");
     } catch (error) {
       console.error('Login failed:', error);
     }

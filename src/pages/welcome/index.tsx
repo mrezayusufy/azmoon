@@ -1,42 +1,39 @@
 import { FormComponent } from "@/components";
+import { ScoreForm } from "@/components/Form/ScoreForm.component";
 import { SHORTCUTS } from "@/constants";
 import { useAppContext } from "@/contexts";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner"
+type ScoreInput = {
+  teamId: string;
+  score: string;
+}
 export const Welcome = () => {
-  const { state, setOrderId, setAnswer, setAnnouncer, setWinner, setStarter, setScore } = useAppContext();
+  const { state, setOrderId, setAnswer, setAnnouncer, setWinner, setStarter } = useAppContext();
   // starter
   const {IsAnnouncer,IsQuestion,IsScore,IsWinner} = state.starter
-  //----- score -----
-  const {
-    register: registerScore,
-    handleSubmit: handleSubmitScore,
-    formState: { errors: errorsScore, isSubmitting: isSubmittingScore },
-  } = useForm({
-    defaultValues: {
-      score: state.score,
-    },
-  });
-  //----- winner -----
+   
+  //+++++++++++++ winner +++++++++++++
   const {
     register: registerWinner,
     handleSubmit: handleSubmitWinner,
-    formState: { errors: errorsWinner, isSubmitting: isSubmittingWinner },
+    formState: { errors: errorsWinner},
   } = useForm({
     defaultValues: {
       winner: state.winner,
     },
   });
+  //+++++++++++ orderid ++++++++++++++++
   const {
     register: registerOrderId,
     handleSubmit: handleSubmitOrderId,
-    formState: { errors: errorsOrderId, isSubmitting: isSubmittingOrderId },
+    formState: { errors: errorsOrderId},
   } = useForm({
     defaultValues: {
       orderId: state.orderId,
     },
   });
-
+  //++++++++++++++++ answer ++++++++++++++++++
   const {
     register: registerAnswer,
     handleSubmit: handleSubmitAnswer,
@@ -46,7 +43,7 @@ export const Welcome = () => {
       answer: state.answer,
     },
   });
-
+  //++++++++++++++ announcer ++++++++++++++
   const {
     register: registerAnnouncer,
     handleSubmit: handleSubmitAnnouncer,
@@ -61,10 +58,7 @@ export const Welcome = () => {
     setOrderId(data.orderId)
     toast("نوبت سوال با موفقیت ثبت شد");
   };
-  const onSubmitScore = (data: any) => {
-    setScore(data.score)
-    toast("امتیاز با موفقیت ثبت شد");
-  };
+   
   const onSubmitWinner = (data: any) => {
     setWinner(data.winner)
     toast("برنده بازی با موفقیت ثبت شد");
@@ -100,9 +94,6 @@ export const Welcome = () => {
       setStarter({...starter, IsWinner: boolValue})
     }
   };
-  const BASE_URL: string = process.env.API_URL as string;
-  const url = import.meta.env.VITE_API_URL;
-  console.log(url)
   return <div className="container">
       <div className="row justify-content-center">
       <details className="bg-white py-3 px-3 rounded-md mb-3 flex flex-col gap-y-3">
@@ -128,7 +119,6 @@ export const Welcome = () => {
               onSubmit={handleSubmitOrderId(onSubmitOrderId)}
               register={registerOrderId("orderId", { required: true })}
               errors={errorsOrderId.orderId}
-              defaultValue={state.orderId}
               label="نوبت سوال"
               buttonText="ثبت کنید"
             /> 
@@ -136,8 +126,7 @@ export const Welcome = () => {
             <FormComponent
               onSubmit={handleSubmitAnswer(onSubmitAnswer)}
               register={registerAnswer("answer", { required: true })}
-              errors={errorsAnswer.answer}
-              defaultValue={state.answer}
+              errors={errorsAnswer.answer} 
               label="جواب سوال"
               buttonText="ثبت کنید"
             /> 
@@ -145,8 +134,7 @@ export const Welcome = () => {
             <FormComponent
               onSubmit={handleSubmitAnnouncer(onSubmitAnnouncer)}
               register={registerAnnouncer("announcer", { required: true })}
-              errors={errorsAnnouncer.announcer}
-              defaultValue={state.announcer}
+              errors={errorsAnnouncer.announcer} 
               label="نام گوینده"
               buttonText="ثبت کنید"
             />
@@ -154,20 +142,12 @@ export const Welcome = () => {
             <FormComponent
               onSubmit={handleSubmitWinner(onSubmitWinner)}
               register={registerWinner("winner", { required: true })}
-              errors={errorsWinner.winner}
-              defaultValue={state.winner}
+              errors={errorsWinner.winner} 
               label="نام برنده بازی"
               buttonText="ثبت کنید"
             /> 
             {/* score */}
-            <FormComponent
-              onSubmit={handleSubmitScore(onSubmitScore)}
-              register={registerScore("score", { required: true })}
-              errors={errorsScore.score}
-              defaultValue={state.score}
-              label="امتیاز بازی"
-              buttonText="ثبت کنید"
-            /> 
+            <ScoreForm/>
             
           </div>
           <div className="row mt-4">

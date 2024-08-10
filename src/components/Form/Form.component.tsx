@@ -2,15 +2,13 @@ type Props = {
   onSubmit: any;
   register: any;
   errors: any;
-  defaultValue: any;
   label: string;
   buttonText: string;
-}
+} 
 export const FormComponent : React.FC<Props> = ({
   onSubmit,
   register,
   errors,
-  defaultValue,
   label,
   buttonText,
 }) => (
@@ -22,8 +20,7 @@ export const FormComponent : React.FC<Props> = ({
             <label className="form-label">{label}</label>
             <input
               className={`form-control ${errors ? "is-invalid" : ""}`}
-              type="text"
-              defaultValue={defaultValue}
+              type="text" 
               {...register}
             />
             {errors && (

@@ -1,19 +1,20 @@
-import { IQuestion } from '@/interfaces';
+import { IQuestion, ITeam } from '@/interfaces';
 import { State, Action } from '@/types';
+import { jsonParse } from '@/utils';
 
 export const initialState: State = {
   showSidebar: true,
-  winner: localStorage.getItem('winner') || '',
-  score: localStorage.getItem("orderId") && parseInt(localStorage.getItem("score") as string) || 0,
-  team: null,
-  orderId: localStorage.getItem("orderId") && parseInt(localStorage.getItem('orderId') as string) || 0,
-  isChecked: Boolean(JSON.parse(localStorage.getItem('isChecked') as string)) || false,
+  winner: localStorage.getItem("winner") || '',
+  score: jsonParse("score") || 0,
+  teams: jsonParse("teams") || [],
+  orderId: jsonParse("orderdId") || 0,
+  isChecked: Boolean(jsonParse("isChecked")) || false,
   code: localStorage.getItem('code') || '',
   answer: localStorage.getItem("answer") || '',
   announcer: localStorage.getItem("announcer") || '',
   selected: localStorage.getItem("selected") || '',
-  question: localStorage.getItem("question") && JSON.parse(localStorage.getItem("question") as string) || null,
-  starter: JSON.parse(localStorage.getItem("starter") as string) || {IsAnnouncer: false, IsScore: false, IsQuestion: false, IsWinner: false},
+  question: jsonParse("question") || null,
+  starter: jsonParse("starter") || {IsAnnouncer: false, IsScore: false, IsQuestion: false, IsWinner: false},
 };
 const question: IQuestion = {
   questionType: 0,
@@ -60,9 +61,11 @@ export const reducer = (state: State, action: Action): State => {
         starter: action.payload,
       };
     case "SET_TEAM":
+      const teams = action.payload as ITeam[];
+      localStorage.setItem("teams", JSON.stringify(teams))
       return {
         ...state,
-        team: action.payload,
+        teams: teams,
       };
     case "SET_WINNER":
       localStorage.setItem('winner', action.payload);
@@ -106,9 +109,11 @@ export const reducer = (state: State, action: Action): State => {
       return { ...state, showSidebar: !state.showSidebar };
     case 'RESET':
       localStorage.setItem('code', '');
-      localStorage.setItem('orderId', '');
-      localStorage.setItem('announcer', '');
-      localStorage.setItem('answer', '');
+      localStorage.setItem('score', '0');
+      localStorage.setItem('starter', JSON.stringify({IsAnnouncer: false, IsScore: false, IsQuestion: false, IsWinner: false}));
+      localStorage.setItem('orderId', '1');
+      localStorage.setItem('announcer', 'null');
+      localStorage.setItem('answer', 'null');
       localStorage.setItem('isChecked', 'false');
       localStorage.setItem('question', JSON.stringify(question));
       return { ...state, question: question, code: "", orderId: 0, announcer: "", answer: "", isChecked: false  };
